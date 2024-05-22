@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Patient Profile Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="email"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .add-button {
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .add-button:hover {
+            background-color: #007bb5;
+        }
+    </style>
+    <script>
+        function addField(containerId, fieldName) {
+            const container = document.getElementById(containerId);
+            const textarea = document.createElement('textarea');
+            textarea.name = fieldName + '[]';
+            textarea.required = true;
+            container.appendChild(textarea);
+        }
+    </script>
+</head>
+<body>
+    <form action="department_nurse" method="post">
+        <h1>Department Nurse Profile</h1>
+        
+        <input type="hidden" name="source" value="sign-up"/>
+        <div class="form-group">
+        <label for="name">User Name</label>
+        <input type="text" id="name" name="name" required/>
+    	</div>
+    	<div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required/>
+   		 </div>
+    		<input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>

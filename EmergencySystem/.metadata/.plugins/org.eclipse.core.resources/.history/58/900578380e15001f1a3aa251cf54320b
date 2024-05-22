@@ -1,0 +1,8 @@
+package models;
+
+public class patient {
+public String print() {
+	String s="the life is difficult";
+	return s;
+}
+}

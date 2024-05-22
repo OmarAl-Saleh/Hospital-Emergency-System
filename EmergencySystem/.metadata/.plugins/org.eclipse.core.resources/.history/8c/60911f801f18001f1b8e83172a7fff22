@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient sign in page</title>
+</head>
+<body>
+<form action="patient" method="get">
+<label>Enter your email</label>
+<input type="email" name="email"/>
+<br>
+<label>Enter your Phone Number</label>
+<input type="tel" name="phoneNumber"/>
+<br>
+<label>check if you submitting this case behalf someone else</label>
+<input type="checkbox" name="sub_patient" />
+<br>
+<input type="submit" value="Submit" />
+
+</form>
+</body>
+</html>

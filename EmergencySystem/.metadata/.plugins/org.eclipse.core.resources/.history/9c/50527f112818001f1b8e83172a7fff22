@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient sign in page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="checkbox"] {
+        margin-bottom: 15px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .hidden-section {
+        display: none;
+    }
+</style>
+<script>
+    function togglePatientInfo() {
+        var checkbox = document.querySelector('input[name="sub_patient"]');
+        var patientInfoDiv = document.getElementById('patient-info');
+        patientInfoDiv.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    window.onload = function() {
+        var checkbox = document.querySelector('input[name="sub_patient"]');
+        checkbox.addEventListener('change', togglePatientInfo);
+        togglePatientInfo(); // Initial check to set the correct state on page load
+    }
+</script>
+<head>sign in page</head>
+<body>
+<form action="patient" method="get">
+    <input type="hidden" name="source" value="sign-in"/>
+    <label>Enter your email</label>
+    <input type="email" name="email" required/>
+    <br>
+    <label>Enter your Phone Number</label>
+    <input type="tel" name="phoneNumber" required/>
+    <br>
+    <label>Check if you are submitting this case on behalf of someone else</label>
+    <input type="checkbox" name="sub_patient" />
+    <div id="patient-info" class="hidden-section">
+        <br>
+        <label>Enter Patient Name</label>
+        <input type="text" name="sub_patient_name"/>
+        <br>
+        <label>Enter Patient Relation</label>
+        <input type="text" name="sub_patient_relation"/>
+    </div>
+    <br>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
+

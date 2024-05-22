@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>sign in page</title>
+</head>
+<body>
+<% 
+String role=request.getParameter("you-are");
+String log_in=request.getParameter("sign");
+
+switch(role)
+{
+case "patient":
+	if("sign-in".equals(log_in))
+	{out.println("the life is difficult");
+		%><jsp:forward page="patient/sign-in.jsp"/>  <%
+	}
+	else
+	{out.println(log_in);}
+	break;
+case "officer":
+	out.println(role);
+	break;
+case "screening-nurse":
+	out.println(role);
+	break;
+case "department-nurse":
+	out.println(role);
+	break;
+
+
+}
+
+//out.println("From sign.jsp You Are "+role);
+//out.println("you want to log in by "+log_in);
+%>
+</body>
+</html>

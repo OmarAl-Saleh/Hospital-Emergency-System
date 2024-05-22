@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Emergency System</title>
+<head><h1>Welcome to hospital emergency system</h1></head>
+<body>
+<form action="Sign_in.jsp" method="get">
+<label for="You Are">You Are</label>
+    <select id="You Are" name="You Are">
+        <option value="patient">Patient</option>
+        <option value="Officer">Officer</option>
+        <option value="Screening Nurse">Screening Nurse</option>
+        <option value="Department Nurse">Department Nurse</option>
+    </select>
+    <input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

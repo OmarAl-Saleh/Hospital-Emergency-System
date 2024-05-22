@@ -1,0 +1,93 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Emergency System</title>
+
+</head>
+<body>
+    <header>
+        <h1>Welcome to hospital emergency system</h1>
+    </header>
+    <main>
+        <form action="patient_servlet" method="get">
+            <label for="you-are">You Are</label>
+            <select id="you-are" name="you-are">
+                <option value="patient">Patient</option>
+                <option value="officer">Officer</option>
+                <option value="screening-nurse">Screening Nurse</option>
+                <option value="department-nurse">Department Nurse</option>
+            </select>
+            <br><br>
+            <label>Log in</label><br>
+            <label>
+                <input type="radio" name="sign" value="sign-in" checked> Sign in
+            </label>
+            <label>
+                <input type="radio" name="sign" value="sign-up"> Sign up
+            </label>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+</body>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 2em;
+    }
+
+    main {
+        margin: 20px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    select, input[type="radio"], input[type="submit"] {
+        margin-bottom: 15px;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</html>
