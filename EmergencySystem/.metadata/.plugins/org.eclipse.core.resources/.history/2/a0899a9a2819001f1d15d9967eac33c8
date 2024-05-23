@@ -1,0 +1,8 @@
+CREATE TABLE "case" (
+    case_number CHAR(9) NOT NULL PRIMARY KEY,
+    status VARCHAR(100) NOT NULL,
+    treatment CLOB,
+    submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    priority VARCHAR(50),
+    department VARCHAR(100),
+);

@@ -1,12 +1,15 @@
-package models;
+ package models;
 
 public class subPatient {
 	
+	
+
 	private String Name;
 	private String relationship;
 	private String [] symptoms;
 	private boolean injured;
 	private String injuredKind;
+	private byte[] injuryImage;
 
 	public subPatient() {
 		super();
@@ -20,6 +23,16 @@ public class subPatient {
 		this.symptoms = symptoms;
 		this.injured = injured;
 		this.injuredKind = injuredKind;
+		
+	}
+	
+	public byte[] getInjuryImage() {
+		return injuryImage;
+	}
+
+
+	public void setInjuryImage(byte[] injuryImage) {
+		this.injuryImage = injuryImage;
 	}
 	
 	

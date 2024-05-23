@@ -1,0 +1,6 @@
+CREATE TABLE department_nurse (
+    name VARCHAR2(255) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    doctor_name VARCHAR2(255) NOT NULL
+    primary key (name,password)
+);

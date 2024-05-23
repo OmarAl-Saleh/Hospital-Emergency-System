@@ -1,0 +1,35 @@
+-- Create the patient table
+CREATE TABLE patient (
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(20) NOT NULL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    address TEXT NOT NULL,
+    medical_history TEXT NOT NULL,
+    chronic_diseases TEXT NOT NULL,
+    allergy TEXT NOT NULL
+);
+
+-- Create the case table
+CREATE TABLE case_table (
+    case_number CHAR(9) NOT NULL PRIMARY KEY,
+    status VARCHAR(100) NOT NULL,
+    treatment TEXT,
+    submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    priority VARCHAR(50),
+    department VARCHAR(100),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+
+-- Create the subpatient table 
+CREATE TABLE sub_patient (
+    sub_patient_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    relationship VARCHAR(50) NOT NULL,
+    symptoms TEXT NOT NULL,
+    injured BOOLEAN NOT NULL,
+    injured_kind VARCHAR(255),
+    injury_image BLOB,
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);

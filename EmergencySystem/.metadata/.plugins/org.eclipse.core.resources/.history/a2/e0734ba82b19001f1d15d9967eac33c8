@@ -1,0 +1,5 @@
+ALTER TABLE case
+ADD CONSTRAINT FK_PATIENT_PHONE_NUMBER
+FOREIGN KEY (phone_number) REFERENCES patient(phone_number);
+
+

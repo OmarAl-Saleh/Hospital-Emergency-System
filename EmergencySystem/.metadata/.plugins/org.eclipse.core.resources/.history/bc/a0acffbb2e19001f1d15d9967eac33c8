@@ -1,0 +1,5 @@
+CREATE TABLE admission_officer (
+    name VARCHAR2(255) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    PRIMARY KEY (NAME,PASSWORD)
+);

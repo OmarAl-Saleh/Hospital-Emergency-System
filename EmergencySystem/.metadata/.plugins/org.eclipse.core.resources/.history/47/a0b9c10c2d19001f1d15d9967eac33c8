@@ -1,0 +1,10 @@
+CREATE TABLE sub_patient (
+    name VARCHAR(255) NOT NULL,
+    relationship VARCHAR(50) NOT NULL,
+    symptoms CLOB NOT NULL,
+    injured NUMBER(1) NOT NULL,
+    injured_kind VARCHAR(255) primary key,
+    injury_image BLOB,
+    phone_number VARCHAR(20) NOT NULL, 
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number) 
+);

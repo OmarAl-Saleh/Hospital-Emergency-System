@@ -1,0 +1,4 @@
+ALTER TABLE CASE
+ADD COLUMN phone_number VARCHAR(20)
+
+

@@ -6,7 +6,6 @@ import java.util.Date;
 public class Case {
 	
 
-
 	private static int caseCounter=0;
 	private String caseNumber;
 	private String status;
