@@ -85,7 +85,7 @@ public class Patient {
     }
     
     public void setCaseDepartment(String department, String caseNumber) {
-        for(int i=0;i<=this.cases.length;i++)
+        for(int i=0;i<this.cases.length;i++)
       {
         	if (cases[i].getCaseNumber().equals(caseNumber)) {
         		cases[i].setDepartment(department);
@@ -95,7 +95,7 @@ public class Patient {
     }
 
     public String getCaseDepartment(String caseNumber) {
-    	 for(int i=0;i<=this.cases.length;i++)
+    	 for(int i=0;i<this.cases.length;i++)
          {
            	if (cases[i].getCaseNumber().equals(caseNumber)) {
            		return cases[i].getDepartment();
@@ -107,7 +107,7 @@ public class Patient {
 
     public void setCasePriority(String priority, String caseNumber) {
         
-    	 for(int i=0;i<=this.cases.length;i++)
+    	 for(int i=0;i<this.cases.length;i++)
          {
            	if (cases[i].getCaseNumber().equals(caseNumber)) {
            		cases[i].setPriority(priority);
@@ -117,7 +117,7 @@ public class Patient {
     }
 
     public String getCasePriority(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		return cases[i].getPriority();
@@ -128,7 +128,7 @@ public class Patient {
     }
 
     public void setCaseTreatment(String treatment, String caseNumber) {
-    	 for(int i=0;i<=this.cases.length;i++)
+    	 for(int i=0;i<this.cases.length;i++)
          {
            	if (cases[i].getCaseNumber().equals(caseNumber)) {
            		cases[i].setTreatment(treatment);
@@ -138,7 +138,7 @@ public class Patient {
     }
 
     public String getCaseTreatment(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		return cases[i].getTreatment();
@@ -151,7 +151,7 @@ public class Patient {
 
 
     public String getStatus(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		return cases[i].getStatus();
@@ -162,7 +162,7 @@ public class Patient {
     }
 
     public void setStatusNew(String caseNumber) {
-    	 for(int i=0;i<=this.cases.length;i++)
+    	 for(int i=0;i<this.cases.length;i++)
          {
            	if (cases[i].getCaseNumber().equals(caseNumber)) {
            		cases[i].setStatusNew();
@@ -172,7 +172,7 @@ public class Patient {
     }
 
     public void setStatusRejected(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusRejected();
@@ -182,7 +182,7 @@ public class Patient {
     }
 
     public void setStatusInitialAssessment(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusInitialAssessment();
@@ -192,7 +192,7 @@ public class Patient {
     }
 
     public void setStatusAsigned(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusAsigned();
@@ -202,7 +202,7 @@ public class Patient {
     }
 
     public void setStatusClosed(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusClosed();
@@ -212,7 +212,7 @@ public class Patient {
     }
 
     public void setStatusTransferred(String caseNumber) {
-    	for(int i=0;i<=this.cases.length;i++)
+    	for(int i=0;i<this.cases.length;i++)
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusTransferred();

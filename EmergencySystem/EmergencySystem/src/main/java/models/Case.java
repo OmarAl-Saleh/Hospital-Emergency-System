@@ -356,7 +356,7 @@ public class Case {
     }
     
     
-    public static Case[] selectAdmittedCases(String departmentName) throws SQLException {
+    public static Case[] selectDepartmentCases(String departmentName) throws SQLException {
         String caseSql = "SELECT * FROM case WHERE present = 1 AND status <> 'Closed' AND department = ?";
         List<Case> casesList = new ArrayList<>();
 

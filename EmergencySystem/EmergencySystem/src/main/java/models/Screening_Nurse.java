@@ -31,7 +31,7 @@ public class Screening_Nurse {
 	
 	
 	public void SetCasePriority(String number , String priority) {
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	      {
 	        	if (cases[i].getCaseNumber().equals(number)) {
 	        		cases[i].setPriority(priority);
@@ -50,7 +50,7 @@ public class Screening_Nurse {
 	
 	public void InitialAssessmentCase(String number) {
 		  
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	      {
 	        	if (cases[i].getCaseNumber().equals(number)) {
 	        		cases[i].setStatusInitialAssessment();
@@ -67,7 +67,7 @@ public class Screening_Nurse {
 	
 	public void AssignedCase(String number) {
 		  
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	      {
 	        	if (cases[i].getCaseNumber().equals(number)) {
 	        		cases[i].setStatusAsigned();
@@ -84,7 +84,7 @@ public class Screening_Nurse {
 	
 	public void TransferredCase(String number) {
 		  
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	      {
 	        	if (cases[i].getCaseNumber().equals(number)) {
 	        		cases[i].setStatusTransferred();
@@ -101,7 +101,7 @@ public class Screening_Nurse {
 	
 	public void setCaseDepartment(String number,String Dep) {
 		 
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	      {
 	        	if (cases[i].getCaseNumber().equals(number)) {
 	        		cases[i].setDepartment(Dep);

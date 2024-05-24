@@ -33,7 +33,7 @@ public class Department_Nurse {
 	
 	
 	public void TransferredCase(String number) {
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	    {
 	      	if (cases[i].getCaseNumber().equals(number)) {
 	      		cases[i].setStatusTransferred();
@@ -51,7 +51,7 @@ public class Department_Nurse {
 	public void ClosedCase(String number,String treatment) {
 		  
 		setCaseTreatment(number,treatment);
-		for(int i=0;i<=this.cases.length;i++)
+		for(int i=0;i<this.cases.length;i++)
 	    {
 	      	if (cases[i].getCaseNumber().equals(number)) {
 	      		cases[i].setStatusClosed();

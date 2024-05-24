@@ -1,1 +1,1 @@
-delete from case;
+select * from admission_officer;

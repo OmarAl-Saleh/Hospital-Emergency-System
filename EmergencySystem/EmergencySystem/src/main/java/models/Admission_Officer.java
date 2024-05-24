@@ -35,7 +35,7 @@ public class Admission_Officer {
   
   public void cancelCase(String number) {
 	  
-	  for(int i=0;i<=this.cases.length;i++)
+	  for(int i=0;i<this.cases.length;i++)
       {
         	if (cases[i].getCaseNumber().equals(number)) {
         		cases[i].setStatusCanceled();
@@ -52,7 +52,7 @@ public class Admission_Officer {
   
 public void rejectCase(String number) {
 	  
-	for(int i=0;i<=this.cases.length;i++)
+	for(int i=0;i<this.cases.length;i++)
     {
       	if (cases[i].getCaseNumber().equals(number)) {
       		cases[i].setStatusRejected();
@@ -69,7 +69,7 @@ public void rejectCase(String number) {
 
 public void RenewCase(String number) {
 	  
-	for(int i=0;i<=this.cases.length;i++)
+	for(int i=0;i<this.cases.length;i++)
     {
       	if (cases[i].getCaseNumber().equals(number)) {
       		cases[i].setStatusNew();
