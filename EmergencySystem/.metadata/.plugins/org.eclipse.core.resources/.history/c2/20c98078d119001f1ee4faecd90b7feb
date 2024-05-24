@@ -23,15 +23,6 @@ public class Department_Nurse {
 		this.cases = cases;
 	}
 	
-	public Department_Nurse(String name, String password, String doctorName) {
-		super();
-		this.name = name;
-		this.password = password;
-		DoctorName = doctorName;
-		
-	}
-	
-	
 	public void TransferredCase(String number) {
 		for(int i=0;i<=this.cases.length;i++)
 	    {
@@ -103,7 +94,7 @@ public class Department_Nurse {
 		return cases;
 	}
 
-	public void setCase(Case[] cases) {
+	public void setPatients(Case[] cases) {
 		this.cases = cases;
 	}
 	

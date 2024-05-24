@@ -21,6 +21,11 @@ public class Screening_Nurse {
 		this.cases = cases;
 	}
 	
+	public Screening_Nurse(String name, String password) {
+		super();
+		this.name = name;
+		this.password = password;
+	}
 	
 	
 	public Screening_Nurse(String name, String password) {

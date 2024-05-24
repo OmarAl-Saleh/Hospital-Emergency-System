@@ -1,1 +1,1 @@
-delete * from case;
+delete from case;

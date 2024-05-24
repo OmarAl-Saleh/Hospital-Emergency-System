@@ -326,7 +326,7 @@ public class Case {
     }
     
     public static Case[] selectAdmittedCases() throws SQLException {
-        String caseSql = "SELECT * FROM case WHERE present = 1 and status <> 'Closed' ";
+        String caseSql = "SELECT * FROM case WHERE present = 1 and status <> 'Canceled' ";
         List<Case> casesList = new ArrayList<>();
 
         try (Connection conn = database.connect();
@@ -354,46 +354,13 @@ public class Case {
 
         return casesList.toArray(new Case[0]);
     }
-    
-    
-    public static Case[] selectAdmittedCases(String departmentName) throws SQLException {
-        String caseSql = "SELECT * FROM case WHERE present = 1 AND status <> 'Closed' AND department = ?";
-        List<Case> casesList = new ArrayList<>();
-
-        try (Connection conn = database.connect();
-             PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
-            
-            caseStmt.setString(1, departmentName);
-            ResultSet rs = caseStmt.executeQuery();
-
-            while (rs.next()) {
-                String caseNumber = rs.getString("case_number");
-                String status = rs.getString("status");
-                String treatment = rs.getString("treatment");
-                Timestamp submitDate = rs.getTimestamp("submit_date");
-                String priority = rs.getString("priority");
-                String department = rs.getString("department");
-                String phoneNumber = rs.getString("phone_number");
-                boolean present = rs.getBoolean("present");
-
-                Case c = new Case(status, treatment, priority, department, phoneNumber, present);
-                c.caseNumber = caseNumber;
-                c.submitDate = new Date(submitDate.getTime());
-
-                casesList.add(c);
-            }
-        }
-
-        return casesList.toArray(new Case[0]);
-    }
-
 
 
     
     
  // Method to retrieve cases from the database with status not equal to "Canceled"
     public static Case[] selectOfficerCases() throws SQLException {
-        String caseSql = "SELECT * FROM case WHERE status <> 'Closed'";
+        String caseSql = "SELECT * FROM case WHERE status <> 'Canceled'";
         List<Case> casesList = new ArrayList<>();
 
         try (Connection conn = database.connect();

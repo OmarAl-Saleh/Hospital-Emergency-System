@@ -21,14 +21,7 @@ public class Screening_Nurse {
 		this.cases = cases;
 	}
 	
-	
-	
-	public Screening_Nurse(String name, String password) {
-		super();
-		this.name = name;
-		this.password = password;
-	}
-	
+
 	
 	public void SetCasePriority(String number , String priority) {
 		for(int i=0;i<=this.cases.length;i++)
