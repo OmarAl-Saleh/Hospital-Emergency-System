@@ -20,12 +20,9 @@ public class Case {
     private String phoneNumber; // to link with the patient
     private boolean present=false;
 
-    // Database connection parameters
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String DB_USER = "system";
-    private static final String DB_PASSWORD = "Omr_20021129";
+  
 
-    public Case() {
+    public Case() throws SQLException {
         super();
         this.caseNumber = generateCaseNumber();
         this.status = "New";
@@ -34,7 +31,7 @@ public class Case {
        // this.submitDate = new Date();
     }
     
-    public Case(String phoneNumber) {
+    public Case(String phoneNumber) throws SQLException {
         super();
         this.caseNumber = generateCaseNumber();
         this.phoneNumber=phoneNumber;
@@ -44,7 +41,7 @@ public class Case {
        // this.submitDate = new Date();
     }
 
-    public Case(String status, String treatment, String priority, String department, String phoneNumber,boolean present) {
+    public Case(String status, String treatment, String priority, String department, String phoneNumber,boolean present) throws SQLException {
         this.caseNumber = generateCaseNumber();
         this.status = status;
         this.treatment = treatment;
@@ -83,8 +80,30 @@ public class Case {
         return caseNumber;
     }
 
-    private static synchronized String generateCaseNumber() {
+//    private static synchronized String generateCaseNumber() {
+//        caseCounter++;
+//        DecimalFormat df = new DecimalFormat("C00000000");
+//        return df.format(caseCounter);
+//    }
+    
+    private static synchronized String generateCaseNumber() throws SQLException {
+        // Query to count the number of rows in the case table
+        String countQuery = "SELECT COUNT(*) FROM case";
+        
+        // Connect to the database and execute the query
+        try (Connection conn = database.connect();
+             PreparedStatement stmt = conn.prepareStatement(countQuery);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            if (rs.next()) {
+                caseCounter = rs.getInt(1); // Get the row count
+            }
+        }
+        
+        // Increment the counter
         caseCounter++;
+        
+        // Format the case number
         DecimalFormat df = new DecimalFormat("C00000000");
         return df.format(caseCounter);
     }
@@ -164,32 +183,21 @@ public class Case {
         this.phoneNumber = phoneNumber;
     }
 
- // Database connection method
- 	private static Connection connect() throws SQLException {
- 	    try {
- 	        Class.forName("oracle.jdbc.driver.OracleDriver");
- 	    } catch (ClassNotFoundException e) {
- 	        System.err.println("Oracle JDBC Driver not found. Ensure the driver is in your classpath.");
- 	        e.printStackTrace();
- 	    }
- 	    return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
- 	}
-
-    // Method to insert a new case into the database
+ 
+ // Method to insert a new case into the database
     public void insertCase() throws SQLException {
         String caseSql = "INSERT INTO case (case_number, status, treatment, priority, department, phone_number , present) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
 
             caseStmt.setString(1, this.caseNumber);
             caseStmt.setString(2, this.status);
             caseStmt.setString(3, this.treatment);
-          //  caseStmt.setTimestamp(4, new Timestamp(this.submitDate.getTime()));
-            caseStmt.setString(5, this.priority);
-            caseStmt.setString(6, this.department);
-            caseStmt.setString(7, this.phoneNumber);
-            caseStmt.setBoolean(8, this.present);
+            caseStmt.setString(4, this.priority);
+            caseStmt.setString(5, this.department);
+            caseStmt.setString(6, this.phoneNumber);
+            caseStmt.setBoolean(7, this.present);
             caseStmt.executeUpdate();
         }
     }
@@ -200,7 +208,7 @@ public class Case {
  // Method to update the status of the case
     public void updateStatus() throws SQLException {
         String updateSql = "UPDATE case SET status = ? WHERE case_number = ?";
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
 
             stmt.setString(1, this.status);
@@ -212,7 +220,7 @@ public class Case {
     // Method to update the treatment of the case
     public void updateTreatment() throws SQLException {
         String updateSql = "UPDATE case SET treatment = ? WHERE case_number = ?";
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
 
             stmt.setString(1, this.treatment);
@@ -224,7 +232,7 @@ public class Case {
     // Method to update the department of the case
     public void updateDepartment() throws SQLException {
         String updateSql = "UPDATE case SET department = ? WHERE case_number = ?";
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
 
             stmt.setString(1, this.department);
@@ -236,7 +244,7 @@ public class Case {
     // Method to update the priority of the case
     public void updatePriority() throws SQLException {
         String updateSql = "UPDATE case SET priority = ? WHERE case_number = ?";
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
 
             stmt.setString(1, this.priority);
@@ -248,7 +256,7 @@ public class Case {
     // Method to update the present status of the case
     public void updatePresent() throws SQLException {
         String updateSql = "UPDATE case SET present = ? WHERE case_number = ?";
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
 
             stmt.setBoolean(1, this.present);
@@ -262,7 +270,7 @@ public class Case {
         String caseSql = "SELECT * FROM case WHERE case_number = ?";
         Case c = null;
 
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
 
             caseStmt.setString(1, caseNumber);
@@ -290,7 +298,7 @@ public class Case {
         String caseSql = "SELECT * FROM case WHERE phone_number = ?";
         List<Case> caseList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
 
             caseStmt.setString(1, phoneNumber);
@@ -321,7 +329,7 @@ public class Case {
         String caseSql = "SELECT * FROM case WHERE present = 1 and status <> 'Canceled' ";
         List<Case> casesList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
 
             ResultSet rs = caseStmt.executeQuery();
@@ -355,7 +363,7 @@ public class Case {
         String caseSql = "SELECT * FROM case WHERE status <> 'Canceled'";
         List<Case> casesList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
 
             ResultSet rs = caseStmt.executeQuery();

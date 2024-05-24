@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,10 +13,7 @@ public class Department_Nurse {
 	private String DoctorName; 
 	private Case [] cases;
 	
-	 // Database connection parameters
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String DB_USER = "system";
-    private static final String DB_PASSWORD = "Omr_20021129";
+	
     
 	public Department_Nurse(String name, String password, String doctorName, Case[] cases) {
 		super();
@@ -106,7 +102,7 @@ public class Department_Nurse {
     public void insertDepartmentNurse() throws SQLException {
         String insertSql = "INSERT INTO department_nurse (name, password, doctor_name) VALUES (?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(insertSql)) {
 
             stmt.setString(1, name);
@@ -121,7 +117,7 @@ public class Department_Nurse {
         String selectSql = "SELECT * FROM department_nurse WHERE name = ? AND password = ?";
         Department_Nurse nurse = null;
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(selectSql)) {
 
             stmt.setString(1, name);

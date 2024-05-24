@@ -14,10 +14,7 @@ public class subPatient {
     private byte[] injuryImage;
     private String phoneNumber; // to link with the patient
 
-    // Database connection parameters
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String DB_USER = "system";
-    private static final String DB_PASSWORD = "Omr_20021129";
+  
 
     public subPatient() {
         super();
@@ -92,17 +89,13 @@ public class subPatient {
         this.phoneNumber = phoneNumber;
     }
 
-    // Database connection method
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    }
-
+   
     // Method to insert a new sub_patient into the database
     public void insertSubPatient() throws SQLException {
         String subPatientSql = "INSERT INTO sub_patient (name, relationship, injured, injured_kind, injury_image, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
         String symptomSql = "INSERT INTO sub_patient_symptom (injured_kind, symptom) VALUES (?, ?)";
 
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement subPatientStmt = conn.prepareStatement(subPatientSql);
              PreparedStatement symptomStmt = conn.prepareStatement(symptomSql)) {
 
@@ -133,7 +126,7 @@ public class subPatient {
         String symptomSql = "SELECT symptom FROM sub_patient_symptom WHERE injured_kind = ?";
         subPatient subPatient = null;
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement subPatientStmt = conn.prepareStatement(subPatientSql);
              PreparedStatement symptomStmt = conn.prepareStatement(symptomSql)) {
 

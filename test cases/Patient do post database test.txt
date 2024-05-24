@@ -1,0 +1,75 @@
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		String source = request.getParameter("source");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String[] medicalHistory = request.getParameterValues("medicalHistory[]");
+        String[] chronicDiseases = request.getParameterValues("chronicDiseases[]");
+        String[] allergies = request.getParameterValues("allergies[]");
+     
+        Patient patient = new Patient(email, phoneNumber, firstName, lastName, dob, address, medicalHistory, chronicDiseases, allergies);
+        
+        try {
+			patient.insertPatient();
+			patient.generateNewCase();
+			Patient p=Patient.selectPatient("0797573443");
+			out.println(p.toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			out.println("exception"+e.getMessage());
+			e.printStackTrace();
+		}
+        
+        
+//        out.println("<html><body>");
+//        out.println("<h1>Patient Profile</h1>");
+//        
+//        out.println("<p>Source: " + source + "</p>");
+//        out.println("<p>Email: " + email + "</p>");
+//        out.println("<p>Phone Number: " + phoneNumber + "</p>");
+//        out.println("<p>First Name: " + firstName + "</p>");
+//        out.println("<p>Last Name: " + lastName + "</p>");
+//        out.println("<p>Date of Birth: " + dob + "</p>");
+//        out.println("<p>Address: " + address + "</p>");
+//
+//        if (medicalHistory != null) {
+//            out.println("<h2>Medical History:</h2>");
+//            for (String history : medicalHistory) {
+//                out.println("<p>" + history + "</p>");
+//            }
+//        } else {
+//            out.println("<p>No Medical History provided</p>");
+//        }
+//
+//        if (chronicDiseases != null) {
+//            out.println("<h2>Chronic Diseases:</h2>");
+//            for (String disease : chronicDiseases) {
+//                out.println("<p>" + disease + "</p>");
+//            }
+//        } else {
+//            out.println("<p>No Chronic Diseases provided</p>");
+//        }
+//
+//        if (allergies != null) {
+//            out.println("<h2>Allergies:</h2>");
+//            for (String allergy : allergies) {
+//                out.println("<p>" + allergy + "</p>");
+//            }
+//        } else {
+//            out.println("<p>No Allergies provided</p>");
+//        }
+//
+//        out.println("</body></html>");
+        
+        
+    }
+	}
+
+

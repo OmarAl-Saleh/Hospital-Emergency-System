@@ -18,10 +18,7 @@ public class Patient {
 	//private boolean present;
 	public subPatient patient;
 
-    // Database connection parameters
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String DB_USER = "system";
-    private static final String DB_PASSWORD = "Omr_20021129";
+
 
     public Patient(String email, String phoneNumber, String firstName, String lastName, String dob, String address,
 			String[] medicalHistory, String[] chronicDisease, String[] allergy) {
@@ -57,7 +54,7 @@ public class Patient {
     //	this.present = present;
 }
 
-    public void generateNewCase() {
+    public void generateNewCase() throws SQLException {
         // Create a new case
         Case newCase = new Case(this.phoneNumber);
         
@@ -305,10 +302,7 @@ public class Patient {
 	
     
 
-    // Database connection method
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    }
+   
 
     // Method to insert a new patient and related data into the database
     public void insertPatient() throws SQLException {
@@ -317,7 +311,7 @@ public class Patient {
         String chronicDiseaseSql = "INSERT INTO patient_chronic_disease (phone_number, chronic_disease) VALUES (?, ?)";
         String allergySql = "INSERT INTO patient_allergy (phone_number, allergy) VALUES (?, ?)";
 
-        try (Connection conn = connect();
+        try (Connection conn = database.connect();
              PreparedStatement patientStmt = conn.prepareStatement(patientSql);
              PreparedStatement medicalHistoryStmt = conn.prepareStatement(medicalHistorySql);
              PreparedStatement chronicDiseaseStmt = conn.prepareStatement(chronicDiseaseSql);
@@ -367,7 +361,7 @@ public class Patient {
         Patient patient = null;
         
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = database.connect();
              PreparedStatement patientStmt = conn.prepareStatement(patientSql);
              PreparedStatement medicalHistoryStmt = conn.prepareStatement(medicalHistorySql);
              PreparedStatement chronicDiseaseStmt = conn.prepareStatement(chronicDiseaseSql);
