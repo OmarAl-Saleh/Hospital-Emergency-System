@@ -1,0 +1,103 @@
+package models;
+
+
+public class Admission_Officer {
+
+	private String name;
+	private String password;
+	private Patient [] patients;
+	
+  public Admission_Officer(String name, String password, Patient[] patients) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.patients = patients;
+	}
+  
+  public void cancelCase(String number) {
+	  
+	  for(int i=0 ; i<patients.length;i++)
+	  {
+		  if(number == patients[i].getCaseNumber())
+			  patients[i].setStatusCanceled();
+	  }
+  }
+  
+public void rejectCase(String number) {
+	  
+	  for(int i=0 ; i<patients.length;i++)
+	  {
+		  if(number == patients[i].getCaseNumber())
+			  patients[i].setStatusRejected();
+	  }
+  }
+
+public void RenewCase(String number) {
+	  
+	  for(int i=0 ; i<patients.length;i++)
+	  {
+		  if(number == patients[i].getCaseNumber())
+			  patients[i].setStatusNew();
+	  }
+}
+
+public void admitPatient(String number)
+{
+	 for(int i=0 ; i<patients.length;i++)
+	  {
+		  if(number == patients[i].getCaseNumber())
+			  patients[i].setPresent();
+	  }
+}
+
+
+public Patient[] getAdmitedPatients()
+{
+	int len=0;
+	for(int i=0;i<patients.length;i++)
+	{
+		if(patients[i].isPresent())
+			len++;
+	}
+	
+	Patient[] admittedPatients= new Patient[len];
+	int index=0;
+	
+	for (int i = 0; i < patients.length; i++) {
+        if (patients[i].isPresent()) {
+            admittedPatients[index] = patients[i];
+            index++;
+        }
+    }
+	
+return admittedPatients;
+
+}
+  
+  
+  
+  public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Patient[] getPatients() {
+		return patients;
+	}
+
+	public void setPatients(Patient[] patients) {
+		this.patients = patients;
+	}
+
+}

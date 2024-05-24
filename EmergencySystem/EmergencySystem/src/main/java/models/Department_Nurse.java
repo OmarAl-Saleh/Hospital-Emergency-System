@@ -1,45 +1,78 @@
 package models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Department_Nurse {
 
 
 	private String name;
 	private String password;
 	private String DoctorName; 
-	private Patient [] patients;
-	public Department_Nurse(String name, String password, String doctorName, Patient[] patients) {
+	private Case [] cases;
+	
+	 // Database connection parameters
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String DB_USER = "system";
+    private static final String DB_PASSWORD = "Omr_20021129";
+    
+	public Department_Nurse(String name, String password, String doctorName, Case[] cases) {
 		super();
 		this.name = name;
 		this.password = password;
 		DoctorName = doctorName;
-		this.patients = patients;
+		this.cases = cases;
 	}
 	
 	public void TransferredCase(String number) {
-		  
-		  for(int i=0 ; i<patients.length;i++)
-		  {
-			  if(number == patients[i].getCaseNumber())
-				  patients[i].setStatusTransferred();
-		  }
+		for(int i=0;i<=this.cases.length;i++)
+	    {
+	      	if (cases[i].getCaseNumber().equals(number)) {
+	      		cases[i].setStatusTransferred();
+	      		try {
+					cases[i].updateStatus();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	      	}
+	      
+	    }
 	  }
 	
 	public void ClosedCase(String number,String treatment) {
 		  
 		setCaseTreatment(number,treatment);
-		  for(int i=0 ; i<patients.length;i++)
-		  {
-			  if(number == patients[i].getCaseNumber())
-				  patients[i].setStatusClosed();
-		  }
+		for(int i=0;i<=this.cases.length;i++)
+	    {
+	      	if (cases[i].getCaseNumber().equals(number)) {
+	      		cases[i].setStatusClosed();
+	      		try {
+					cases[i].updateStatus();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	      	}
+	      
+	    }
 	  }
 	
 	private void setCaseTreatment(String number,String treatment) {
 		  
-		  for(int i=0 ; i<patients.length;i++)
+		for(int i=0 ; i<this.cases.length;i++)
 		  {
-			  if(number == patients[i].getCaseNumber())
-				  patients[i].setCaseTreatment(treatment);
+			  if(cases[i].getCaseNumber().equals(number))
+				  cases[i].setTreatment(treatment);
+			  try {
+					cases[i].updateTreatment();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		  }
 	  }
 
@@ -61,11 +94,48 @@ public class Department_Nurse {
 	public void setDoctorName(String doctorName) {
 		DoctorName = doctorName;
 	}
-	public Patient[] getPatients() {
-		return patients;
+	public Case[] getCases() {
+		return cases;
 	}
-	public void setPatients(Patient[] patients) {
-		this.patients = patients;
+
+	public void setPatients(Case[] cases) {
+		this.cases = cases;
 	}
+	
+	 // Method to insert a new department nurse into the database
+    public void insertDepartmentNurse() throws SQLException {
+        String insertSql = "INSERT INTO department_nurse (name, password, doctor_name) VALUES (?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(insertSql)) {
+
+            stmt.setString(1, name);
+            stmt.setString(2, password);
+            stmt.setString(3, DoctorName);
+            stmt.executeUpdate();
+        }
+    }
+
+    // Method to retrieve a department nurse from the database by name and password
+    public static Department_Nurse selectDepartmentNurse(String name, String password) throws SQLException {
+        String selectSql = "SELECT * FROM department_nurse WHERE name = ? AND password = ?";
+        Department_Nurse nurse = null;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+
+            stmt.setString(1, name);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Nurse found, create a new instance
+                    String doctorName = rs.getString("doctor_name");
+                    nurse = new Department_Nurse(name, password, doctorName, null); // Assuming cases array is not needed here
+                }
+            }
+        }
+        return nurse;
+    }
 	
 }

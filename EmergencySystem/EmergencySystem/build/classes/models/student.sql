@@ -1,2 +1,2 @@
-ALTER TABLE admission_officer 
-add submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ;
+ALTER TABLE patient 
+add dob varchar(20);

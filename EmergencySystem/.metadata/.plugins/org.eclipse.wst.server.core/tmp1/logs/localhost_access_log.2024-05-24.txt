@@ -1,0 +1,11 @@
+127.0.0.1 - - [24/May/2024:11:29:59 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:30:00 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2171
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:30:00 +0300] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:30:06 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:30:42 +0300] "POST /EmergencySystem/patient HTTP/1.1" 500 3820
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:01 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:02 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:02 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:02 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:02 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-up HTTP/1.1" 200 4213
+0:0:0:0:0:0:0:1 - - [24/May/2024:11:32:23 +0300] "POST /EmergencySystem/patient HTTP/1.1" 200 428

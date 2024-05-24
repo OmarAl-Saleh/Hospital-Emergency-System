@@ -1,24 +1,29 @@
 package models;
 
+import java.sql.*;
 import java.util.Arrays;
-import java.util.Date;
+//import java.util.Date;
 
 public class Patient {
 	private String email;
 	private String phoneNumber;
 	private String firstName;
 	private String lastName;
-	private Date dob;
+	private String dob;
 	private String address;
 	private String[] medicalHistory;
 	private String[] chronicDisease;
 	private String[] allergy;
-	private Case  cases;
-	private boolean present;
+	private Case []  cases;
+	//private boolean present;
 	public subPatient patient;
 
-	
-	public Patient(String email, String phoneNumber, String firstName, String lastName, Date dob, String address,
+    // Database connection parameters
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String DB_USER = "system";
+    private static final String DB_PASSWORD = "Omr_20021129";
+
+    public Patient(String email, String phoneNumber, String firstName, String lastName, String dob, String address,
 			String[] medicalHistory, String[] chronicDisease, String[] allergy) {
 		super();
 		this.email = email;
@@ -30,89 +35,210 @@ public class Patient {
 		this.medicalHistory = medicalHistory;
 		this.chronicDisease = chronicDisease;
 		this.allergy = allergy;
-		this.cases= new Case();
-		this.present=false;
+		//this.generateNewCase();
+		//this.cases= new Case();
+	//	this.present=false;
 	} 
-	
-	public void setCaseDepartment(String department) {
-		cases.setDepartment(department);
-	}
-	
-	public String getCaseDepartment() {
-		return cases.getDepartment();
-	}
-	
-	public void setCasePriority(String priority) {
-		cases.setPriority(priority);
-	}
-	
-	public String getCasePriority() {
-		return cases.getPriority();
-	}
-	
-	public void setCaseTreatment(String treatment) {
-		cases.setTreatment(treatment);
-	}
-	
-	public String getCaseTreatment() {
-		return cases.getTreatment();
-	}
-	
-	public String getCaseNumber() {
-		return cases.getCaseNumber();}
-	
-	public boolean isPresent() {
-		return present;
-	}
+    
+    public Patient(String email, String phoneNumber, String firstName, String lastName, String dob, String address,
+            String[] medicalHistory, String[] chronicDisease, String[] allergy, Case[] cases, subPatient patient) {
+    	super();
+    	this.email = email;
+    	this.phoneNumber = phoneNumber;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.dob = dob;
+    	this.address = address;
+    	this.medicalHistory = medicalHistory;
+    	this.chronicDisease = chronicDisease;
+    	this.allergy = allergy;
+    	this.cases = cases;
+    	this.patient = patient;
+    //	this.present = present;
+}
 
-	public void setPresent() {
-		this.present = true;
-	}
-	
-	public String getStatus() {
-		return cases.getStatus();
-	}
+    public void generateNewCase() {
+        // Create a new case
+        Case newCase = new Case(this.phoneNumber);
+        
+        // Initialize the cases array if it's null
+        if (cases == null) {
+            cases = new Case[1];
+            cases[0] = newCase;
+        } else {
+            // Resize the cases array to accommodate the new case
+            Case[] resizedCases = new Case[cases.length + 1];
+            
+            // Copy existing cases to the resized array
+            System.arraycopy(cases, 0, resizedCases, 0, cases.length);
+            
+            // Add the new case to the end of the array
+            resizedCases[cases.length] = newCase;
+            
+            // Assign the resized array back to cases
+            cases = resizedCases;
+        }
+        
+        try {
+			newCase.insertCase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public void setCaseDepartment(String department, String caseNumber) {
+        for(int i=0;i<=this.cases.length;i++)
+      {
+        	if (cases[i].getCaseNumber().equals(caseNumber)) {
+        		cases[i].setDepartment(department);
+        	}
+        
+      }
+    }
 
-	public void setStatusNew()
-	{
-		cases.setStatus("New");
-	}
-	
-	public void setStatusCanceled()
-	{
-		if(present==true)
-		cases.setStatus("Canceled");
-	}
-	
-	public void setStatusRejected()
-	{
-		cases.setStatus("Rejected");
-	}
-	
-	public void setStatusInitialAssessment()
-	{
-		cases.setStatus("Initial Assessment");
-		
-	}
-	
-	public void setStatusAsigned()
-	{
-		cases.setStatus("Asigned");
-	}
-	
-	public void setStatusClosed()
-	{
-		cases.setStatus("Closed");
-	}
-	
-	public void setStatusTransferred()
-	{
-		cases.setStatus("Transferred");
-	}
+    public String getCaseDepartment(String caseNumber) {
+    	 for(int i=0;i<=this.cases.length;i++)
+         {
+           	if (cases[i].getCaseNumber().equals(caseNumber)) {
+           		return cases[i].getDepartment();
+           	}
+           
+         }
+    	 return null;
+    }
+
+    public void setCasePriority(String priority, String caseNumber) {
+        
+    	 for(int i=0;i<=this.cases.length;i++)
+         {
+           	if (cases[i].getCaseNumber().equals(caseNumber)) {
+           		cases[i].setPriority(priority);
+           	}
+           
+         }
+    }
+
+    public String getCasePriority(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		return cases[i].getPriority();
+          	}
+          
+        }
+   	 return null;
+    }
+
+    public void setCaseTreatment(String treatment, String caseNumber) {
+    	 for(int i=0;i<=this.cases.length;i++)
+         {
+           	if (cases[i].getCaseNumber().equals(caseNumber)) {
+           		cases[i].setTreatment(treatment);
+           	}
+           
+         }
+    }
+
+    public String getCaseTreatment(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		return cases[i].getTreatment();
+          	}
+          
+        }
+   	 return null;
+    }
+
+
+
+    public String getStatus(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		return cases[i].getStatus();
+          	}
+          
+        }
+   	 return null;
+    }
+
+    public void setStatusNew(String caseNumber) {
+    	 for(int i=0;i<=this.cases.length;i++)
+         {
+           	if (cases[i].getCaseNumber().equals(caseNumber)) {
+           		cases[i].setStatusNew();
+           	}
+           
+         }
+    }
+
+    public void setStatusRejected(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		cases[i].setStatusRejected();
+          	}
+          
+        }
+    }
+
+    public void setStatusInitialAssessment(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		cases[i].setStatusInitialAssessment();
+          	}
+          
+        }
+    }
+
+    public void setStatusAsigned(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		cases[i].setStatusAsigned();
+          	}
+          
+        }
+    }
+
+    public void setStatusClosed(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		cases[i].setStatusClosed();
+          	}
+          
+        }
+    }
+
+    public void setStatusTransferred(String caseNumber) {
+    	for(int i=0;i<=this.cases.length;i++)
+        {
+          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          		cases[i].setStatusTransferred();
+          	}
+          
+        }
+    }
+
+   
+
+
+
 	
 	public void setSubPatient(String name, String relationship, String[] symptoms, boolean injured, String injuredKind) {
-		patient=new subPatient(name,relationship,symptoms,injured,injuredKind);
+		patient=new subPatient(name,relationship,symptoms,injured,injuredKind,this.phoneNumber);
+		try {
+			patient.insertSubPatient();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 	
 	public String getEmail() {
 		return email;
@@ -142,10 +268,10 @@ public class Patient {
 		this.lastName = lastName;
 	}
 	
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	
@@ -177,22 +303,126 @@ public class Patient {
 		this.allergy = allergy;
 	}
 	
-	
-	
-	
+    
+
+    // Database connection method
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    }
+
+    // Method to insert a new patient and related data into the database
+    public void insertPatient() throws SQLException {
+        String patientSql = "INSERT INTO patient (email, phone_number, first_name, last_name, dob, address) VALUES (?, ?, ?, ?, ?, ?)";
+        String medicalHistorySql = "INSERT INTO patient_medical_history (phone_number, medical_history) VALUES (?, ?)";
+        String chronicDiseaseSql = "INSERT INTO patient_chronic_disease (phone_number, chronic_disease) VALUES (?, ?)";
+        String allergySql = "INSERT INTO patient_allergy (phone_number, allergy) VALUES (?, ?)";
+
+        try (Connection conn = connect();
+             PreparedStatement patientStmt = conn.prepareStatement(patientSql);
+             PreparedStatement medicalHistoryStmt = conn.prepareStatement(medicalHistorySql);
+             PreparedStatement chronicDiseaseStmt = conn.prepareStatement(chronicDiseaseSql);
+             PreparedStatement allergyStmt = conn.prepareStatement(allergySql)) {
+
+            // Insert into patient table
+            patientStmt.setString(1, this.email);
+            patientStmt.setString(2, this.phoneNumber);
+            patientStmt.setString(3, this.firstName);
+            patientStmt.setString(4, this.lastName);
+            patientStmt.setString(5, this.dob );
+            patientStmt.setString(6, this.address);
+           // patientStmt.setBoolean(7, this.present);
+            patientStmt.executeUpdate();
+
+            // Insert into patient_medical_history table
+            for (String history : this.medicalHistory) {
+                medicalHistoryStmt.setString(1, this.phoneNumber);
+                medicalHistoryStmt.setString(2, history);
+                medicalHistoryStmt.executeUpdate();
+            }
+
+            // Insert into patient_chronic_disease table
+            for (String disease : this.chronicDisease) {
+                chronicDiseaseStmt.setString(1, this.phoneNumber);
+                chronicDiseaseStmt.setString(2, disease);
+                chronicDiseaseStmt.executeUpdate();
+            }
+
+            // Insert into patient_allergy table
+            for (String allergy : this.allergy) {
+                allergyStmt.setString(1, this.phoneNumber);
+                allergyStmt.setString(2, allergy);
+                allergyStmt.executeUpdate();
+            }
+        }
+        
+       // this.patient.insertSubPatient();
+    }
+
+    // Method to retrieve patient and related data from the database by phone number
+    public static Patient selectPatient(String phoneNumber) throws SQLException {
+        String patientSql = "SELECT * FROM patient WHERE phone_number = ?";
+        String medicalHistorySql = "SELECT medical_history FROM patient_medical_history WHERE phone_number = ?";
+        String chronicDiseaseSql = "SELECT chronic_disease FROM patient_chronic_disease WHERE phone_number = ?";
+        String allergySql = "SELECT allergy FROM patient_allergy WHERE phone_number = ?";
+        Patient patient = null;
+        
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement patientStmt = conn.prepareStatement(patientSql);
+             PreparedStatement medicalHistoryStmt = conn.prepareStatement(medicalHistorySql);
+             PreparedStatement chronicDiseaseStmt = conn.prepareStatement(chronicDiseaseSql);
+             PreparedStatement allergyStmt = conn.prepareStatement(allergySql)) {
+
+            // Retrieve patient information
+            patientStmt.setString(1, phoneNumber);
+            ResultSet rs = patientStmt.executeQuery();
+
+            if (rs.next()) {
+                String email = rs.getString("email");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String dob = rs.getString("dob");
+                String address = rs.getString("address");
+               // boolean present = rs.getBoolean("present");
+
+                // Retrieve medical history
+                medicalHistoryStmt.setString(1, phoneNumber);
+                ResultSet mhRs = medicalHistoryStmt.executeQuery();
+                String[] medicalHistory = mhRs.next() ? mhRs.getString("medical_history").split(",") : new String[0];
+
+                // Retrieve chronic diseases
+                chronicDiseaseStmt.setString(1, phoneNumber);
+                ResultSet cdRs = chronicDiseaseStmt.executeQuery();
+                String[] chronicDisease = cdRs.next() ? cdRs.getString("chronic_disease").split(",") : new String[0];
+
+                // Retrieve allergies
+                allergyStmt.setString(1, phoneNumber);
+                ResultSet allergyRs = allergyStmt.executeQuery();
+                String[] allergy = allergyRs.next() ? allergyRs.getString("allergy").split(",") : new String[0];
+                
+                subPatient sub = subPatient.selectSubPatient(phoneNumber);
+                Case [] c = Case.selectCasesByPhoneNumber(phoneNumber);
+
+               // patient = new Patient(email, phoneNumber, firstName, lastName, dob, address, medicalHistory, chronicDisease, allergy,c,sub, present);
+                patient = new Patient(email, phoneNumber, firstName, lastName, dob, address, medicalHistory, chronicDisease, allergy,c,sub);
+            }
+        }
+        return patient;
+    }
+
+    // Getters and setters...
+
     public String toString() {
         return "Patient{" +
                 "email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dob +
+                ", dob=" + dob +
                 ", address='" + address + '\'' +
-                ", medicalHistory='" + Arrays.toString(medicalHistory) + '\'' +
-                ", chronicDiseases='" + Arrays.toString(chronicDisease) + '\'' +
-                ", allergies='" + Arrays.toString(allergy) + '\'' +
-                ",present="+present+
+                ", medicalHistory=" + Arrays.toString(medicalHistory) +
+                ", chronicDisease=" + Arrays.toString(chronicDisease) +
+                ", allergy=" + Arrays.toString(allergy) +
                 '}';
     }
-	
 }

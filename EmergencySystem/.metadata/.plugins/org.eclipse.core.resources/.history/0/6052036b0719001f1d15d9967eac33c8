@@ -1,2 +1,0 @@
-CREATE TABLE omar (id VARCHAR2(10), name VARCHAR2(50), email VARCHAR2(50), phone VARCHAR2(15), PRIMARY KEY(id));
-insert into omar values('O123456789', 'Omar Example', 'omar@example.com', '123-456-7890');

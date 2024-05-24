@@ -1,0 +1,104 @@
+CREATE TABLE patient (
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(20) NOT NULL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    address CLOB NOT NULL
+    
+);
+
+
+--------------------------------------------------------------------------
+
+CREATE TABLE patient_medical_history (
+    phone_number VARCHAR(20),
+    medical_history VARCHAR(200),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+
+--------------------------------------------------------------------------
+
+CREATE TABLE patient_chronic_disease (
+    phone_number VARCHAR(20),
+    chronic_disease VARCHAR(200),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+--------------------------------------------------------------------------
+
+CREATE TABLE patient_allergy (
+    phone_number VARCHAR(20),
+    allergy VARCHAR(200),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+
+-----------------------------------------------------------------------
+CREATE TABLE sub_patient (
+    name VARCHAR(255) NOT NULL,
+    relationship VARCHAR(50) NOT NULL,
+    injured NUMBER(1) NOT NULL,
+    injured_kind VARCHAR(255) PRIMARY KEY,
+    injury_image BLOB,
+    phone_number VARCHAR(20),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+
+
+--------------------------------------------------------------------------
+
+CREATE TABLE sub_patient_symptom (
+    injured_kind VARCHAR(20),
+    symptom VARCHAR(200),
+    FOREIGN KEY (injured_kind) REFERENCES sub_patient(injured_kind)
+);
+
+-------------------------------------------------------------------------
+
+
+CREATE TABLE case (
+    case_number char(9) PRIMARY KEY,
+    status VARCHAR(100) NOT NULL,
+    treatment CLOB,
+    submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    priority VARCHAR(50),
+    department VARCHAR(100),
+    phone_number VARCHAR(20),
+    present NUMBER(1),
+    FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
+);
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE admission_officer (
+    name VARCHAR2(255) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (name,password)
+);
+
+
+
+--------------------------------------------------------------------
+
+CREATE TABLE screening_nurse (
+    name VARCHAR2(255) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    PRIMARY KEY (name,password)
+);
+
+-----------------------------------------------------------------
+
+CREATE TABLE department_nurse (
+    name VARCHAR2(255) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    doctor_name VARCHAR2(255) NOT NULL,
+    PRIMARY KEY (name,password)
+);
+
+
+
+
+
+
+
