@@ -1,8 +1,0 @@
-package models;
-
-public class patient {
-String print() {
-	String s="the life is difficult";
-	return s;
-}
-}

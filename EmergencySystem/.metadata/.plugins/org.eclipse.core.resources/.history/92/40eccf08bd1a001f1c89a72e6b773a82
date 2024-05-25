@@ -135,7 +135,7 @@
         <label for="symptoms">symptoms</label>
         <br>
         <div id="subsymptomscontainer">
-            <textarea name="symptoms[]"></textarea>
+            <textarea name="symptoms[]" required></textarea>
         </div>
         <br>
         <button type="button" class="add-button" onclick="addField('subsymptomscontainer', 'symptoms')">Add Another symptom</button>

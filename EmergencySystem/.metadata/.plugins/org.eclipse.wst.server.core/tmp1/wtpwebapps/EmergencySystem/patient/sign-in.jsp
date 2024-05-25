@@ -61,6 +61,16 @@
     .hidden-section {
         display: none;
     }
+    .add-button {
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    
 </style>
 <script>
     function togglePatientInfo() {
@@ -68,12 +78,37 @@
         var patientInfoDiv = document.getElementById('patient-info');
         patientInfoDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
-
+	
+    function toggleInjuryInfo() {
+        var checkbox = document.querySelector('input[name="injured"]');
+        var patientInfoDiv = document.getElementById('injury');
+        patientInfoDiv.style.display = checkbox.checked ? 'block' : 'none';
+    }
+    
     window.onload = function() {
         var checkbox = document.querySelector('input[name="sub_patient"]');
         checkbox.addEventListener('change', togglePatientInfo);
         togglePatientInfo(); // Initial check to set the correct state on page load
+        
+        var checkbox2 = document.querySelector('input[name="injured"]');
+        checkbox2.addEventListener('change', toggleInjuryInfo);
+        toggleInjuryInfo();
     }
+    
+    function toggleInjuryInfo() {
+        var checkbox = document.querySelector('input[name="injured"]');
+        var patientInfoDiv = document.getElementById('injury');
+        patientInfoDiv.style.display = checkbox.checked ? 'block' : 'none';
+    }
+    
+    function addField(containerId, fieldName) {
+        const container = document.getElementById(containerId);
+        const textarea = document.createElement('textarea');
+        textarea.name = fieldName + '[]';
+        textarea.required = true;
+        container.appendChild(textarea);
+    }
+
 </script>
 </head>
 <body>
@@ -95,10 +130,29 @@
         <br>
         <label>Enter Patient Relation</label>
         <input type="text" name="sub_patient_relation"/>
+        
+        <br>
+        <label for="symptoms">symptoms</label>
+        <br>
+        <div id="subsymptomscontainer">
+            <textarea name="symptoms[]"></textarea>
+        </div>
+        <br>
+        <button type="button" class="add-button" onclick="addField('subsymptomscontainer', 'symptoms')">Add Another symptom</button>
+    <label>is the patient injured?</label>
+    <input type="checkbox" name="injured" />  
+    <div id="injury" class="hidden-section">
+    	<br>
+        <label>Enter injury</label>
+        <input type="text" name="injury_name"/>
+        <br>
+        <label for="img">injury image:</label>
+  		<input type="file" id="img" name="img" accept="image/*">
+ 	 	<br>
+    </div> 
     </div>
     <br>
     <input type="submit" value="Submit" />
 </form>
 </body>
 </html>
-
