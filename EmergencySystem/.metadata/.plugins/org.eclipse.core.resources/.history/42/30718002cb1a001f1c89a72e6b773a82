@@ -1,0 +1,5 @@
+INSERT INTO sub_patient (
+    name, relationship, injured, injured_kind,injury_image, phone_number
+) VALUES (
+    'John Doe', 'Brother', 1, 'Broken Arm',null, '0000'
+);

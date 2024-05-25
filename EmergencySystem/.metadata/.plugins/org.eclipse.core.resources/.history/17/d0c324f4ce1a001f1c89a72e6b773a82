@@ -1,0 +1,6 @@
+CREATE TABLE sub_patient_symptom (
+    name VARCHAR(255) NOT NULL,
+    relationship VARCHAR(50) NOT NULL,
+    symptom VARCHAR(20),
+    FOREIGN KEY (name, relationship) REFERENCES sub_patient(name, relationship)
+);

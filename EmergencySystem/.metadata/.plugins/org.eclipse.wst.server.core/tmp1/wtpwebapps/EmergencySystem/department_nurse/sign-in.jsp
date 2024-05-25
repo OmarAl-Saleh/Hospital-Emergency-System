@@ -43,6 +43,15 @@
         box-sizing: border-box;
     }
 
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
     input[type="submit"] {
         background-color: #4CAF50;
         color: white;
@@ -65,7 +74,7 @@
 </head>
 <body>
 <form action="department_nurse" method="get">
-    <h1>department nurse Sign In</h1>
+    <h1>Department Nurse Sign In</h1>
     <input type="hidden" name="source" value="sign-in"/>
     <div class="form-group">
         <label for="name">User Name</label>
@@ -74,6 +83,22 @@
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required/>
+    </div>
+    <div class="form-group">
+        <label for="doctor">Doctor Name</label>
+        <input type="text" id="doctor" name="doctor" required/>
+    </div>
+    <div class="form-group">
+        <label for="department">Select Department</label>
+        <select id="department" name="department" required>
+            <option value="Triage">Triage</option>
+            <option value="Treatment Rooms">Treatment Rooms</option>
+            <option value="Resuscitation Area">Resuscitation Area</option>
+            <option value="Diagnostic Imaging">Diagnostic Imaging</option>
+            <option value="Laboratory">Laboratory</option>
+            <option value="Observation Area">Observation Area</option>
+            <option value="Psychiatric Emergency Services">Psychiatric Emergency Services</option>
+        </select>
     </div>
     <input type="submit" value="Submit"/>
 </form>

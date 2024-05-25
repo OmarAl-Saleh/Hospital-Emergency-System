@@ -11,23 +11,26 @@ public class Department_Nurse {
 	private String name;
 	private String password;
 	private String DoctorName; 
+	private String DepartmentName;
 	private Case [] cases;
 	
 	
     
-	public Department_Nurse(String name, String password, String doctorName, Case[] cases) {
+	public Department_Nurse(String name, String password, String doctorName,String DepartmentName, Case[] cases) {
 		super();
 		this.name = name;
 		this.password = password;
 		DoctorName = doctorName;
+		this.DepartmentName= DepartmentName;
 		this.cases = cases;
 	}
 	
-	public Department_Nurse(String name, String password, String doctorName) {
+	public Department_Nurse(String name, String password,String DepartmentName, String doctorName) {
 		super();
 		this.name = name;
 		this.password = password;
 		DoctorName = doctorName;
+		this.DepartmentName= DepartmentName;
 		
 	}
 	
@@ -103,13 +106,13 @@ public class Department_Nurse {
 		return cases;
 	}
 
-	public void setCase(Case[] cases) {
+	public void setCases(Case[] cases) {
 		this.cases = cases;
 	}
 	
 	 // Method to insert a new department nurse into the database
     public void insertDepartmentNurse() throws SQLException {
-        String insertSql = "INSERT INTO department_nurse (name, password, doctor_name) VALUES (?, ?, ?)";
+        String insertSql = "INSERT INTO department_nurse (name, password, doctor_name ,department_name) VALUES (?, ?, ?,?)";
 
         try (Connection conn = database.connect();
              PreparedStatement stmt = conn.prepareStatement(insertSql)) {
@@ -117,6 +120,7 @@ public class Department_Nurse {
             stmt.setString(1, name);
             stmt.setString(2, password);
             stmt.setString(3, DoctorName);
+            stmt.setString(4, DepartmentName);
             stmt.executeUpdate();
         }
     }
@@ -136,7 +140,8 @@ public class Department_Nurse {
                 if (rs.next()) {
                     // Nurse found, create a new instance
                     String doctorName = rs.getString("doctor_name");
-                    nurse = new Department_Nurse(name, password, doctorName, null); // Assuming cases array is not needed here
+                    String departmentName=rs.getString("department_name");
+                    nurse = new Department_Nurse(name, password, doctorName,departmentName, null); // Assuming cases array is not needed here
                 }
             }
         }

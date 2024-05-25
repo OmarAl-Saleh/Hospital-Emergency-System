@@ -11,7 +11,7 @@ public class subPatient {
     private String[] symptoms;
     private boolean injured;
     private String injuredKind;
-    private byte[] injuryImage;
+    private byte[] injuryImage=null;
     private String phoneNumber; // to link with the patient
 
   
@@ -89,11 +89,10 @@ public class subPatient {
         this.phoneNumber = phoneNumber;
     }
 
-   
-    // Method to insert a new sub_patient into the database
+ // Method to insert a new sub_patient into the database
     public void insertSubPatient() throws SQLException {
         String subPatientSql = "INSERT INTO sub_patient (name, relationship, injured, injured_kind, injury_image, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
-        String symptomSql = "INSERT INTO sub_patient_symptom (injured_kind, symptom) VALUES (?, ?)";
+        String symptomSql = "INSERT INTO sub_patient_symptom (name, relationship, symptom) VALUES (?, ?, ?)";
 
         try (Connection conn = database.connect();
              PreparedStatement subPatientStmt = conn.prepareStatement(subPatientSql);
@@ -101,29 +100,33 @@ public class subPatient {
 
             conn.setAutoCommit(false);
 
+            // Insert into sub_patient table
             subPatientStmt.setString(1, this.name);
             subPatientStmt.setString(2, this.relationship);
             subPatientStmt.setBoolean(3, this.injured);
             subPatientStmt.setString(4, this.injuredKind);
             subPatientStmt.setBytes(5, this.injuryImage);
-            subPatientStmt.setString(6, this.phoneNumber); // Add the phone_number field to match the patient
-
+            subPatientStmt.setString(6, this.phoneNumber);
             subPatientStmt.executeUpdate();
 
+            // Insert into sub_patient_symptom table
             for (String symptom : this.symptoms) {
-                symptomStmt.setString(1, this.injuredKind);
-                symptomStmt.setString(2, symptom);
+                symptomStmt.setString(1, this.name);
+                symptomStmt.setString(2, this.relationship);
+                symptomStmt.setString(3, symptom);
                 symptomStmt.executeUpdate();
             }
 
             conn.commit();
-        }
+        } 
     }
+
+    
     
  // Method to select a sub-patient from the database based on phoneNumber
     public static subPatient selectSubPatient(String phoneNumber) throws SQLException {
         String subPatientSql = "SELECT * FROM sub_patient WHERE phone_number = ?";
-        String symptomSql = "SELECT symptom FROM sub_patient_symptom WHERE injured_kind = ?";
+        String symptomSql = "SELECT symptom FROM sub_patient_symptom WHERE name = ? AND relationship = ?";
         subPatient subPatient = null;
 
         try (Connection conn = database.connect();
@@ -139,8 +142,9 @@ public class subPatient {
                 boolean injured = subPatientRs.getBoolean("injured");
                 String injuredKind = subPatientRs.getString("injured_kind");
                 byte[] injuryImage = subPatientRs.getBytes("injury_image");
- 
-                symptomStmt.setString(1, injuredKind);
+
+                symptomStmt.setString(1, name);
+                symptomStmt.setString(2, relationship);
                 ResultSet symptomRs = symptomStmt.executeQuery();
 
                 List<String> symptomList = new ArrayList<>();
@@ -155,6 +159,7 @@ public class subPatient {
         }
         return subPatient;
     }
+
     
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -1,0 +1,2 @@
+alter table case
+add follow_doctor varchar(50);

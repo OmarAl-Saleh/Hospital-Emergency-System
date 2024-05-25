@@ -1,1 +1,1 @@
-select * from patient;
+select * from sub_patient;

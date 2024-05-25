@@ -37,9 +37,10 @@ CREATE TABLE sub_patient (
     name VARCHAR(255) NOT NULL,
     relationship VARCHAR(50) NOT NULL,
     injured NUMBER(1) NOT NULL,
-    injured_kind VARCHAR(255) PRIMARY KEY,
+    injured_kind VARCHAR(255),
     injury_image BLOB,
     phone_number VARCHAR(20),
+    PRIMARY KEY(name,relationship),
     FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
 );
 
@@ -47,9 +48,10 @@ CREATE TABLE sub_patient (
 --------------------------------------------------------------------------
 
 CREATE TABLE sub_patient_symptom (
-    injured_kind VARCHAR(20),
-    symptom VARCHAR(200),
-    FOREIGN KEY (injured_kind) REFERENCES sub_patient(injured_kind)
+    name VARCHAR(255) NOT NULL,
+    relationship VARCHAR(50) NOT NULL,
+    symptom VARCHAR(20),
+    FOREIGN KEY (name, relationship) REFERENCES sub_patient(name, relationship)
 );
 
 -------------------------------------------------------------------------
@@ -64,6 +66,7 @@ CREATE TABLE case (
     department VARCHAR(100),
     phone_number VARCHAR(20),
     present NUMBER(1),
+    follow_doctor varchar(50),
     FOREIGN KEY (phone_number) REFERENCES patient(phone_number)
 );
 
@@ -71,8 +74,8 @@ CREATE TABLE case (
 
 
 CREATE TABLE admission_officer (
-    name VARCHAR2(255) NOT NULL,
-    password VARCHAR2(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (name,password)
 );
@@ -82,17 +85,18 @@ CREATE TABLE admission_officer (
 --------------------------------------------------------------------
 
 CREATE TABLE screening_nurse (
-    name VARCHAR2(255) NOT NULL,
-    password VARCHAR2(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     PRIMARY KEY (name,password)
 );
 
 -----------------------------------------------------------------
 
 CREATE TABLE department_nurse (
-    name VARCHAR2(255) NOT NULL,
-    password VARCHAR2(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     doctor_name VARCHAR2(255) NOT NULL,
+    department_name VARCHAR(50),
     PRIMARY KEY (name,password)
 );
 

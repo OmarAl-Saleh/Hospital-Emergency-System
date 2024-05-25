@@ -4546,3 +4546,103 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:03:17.761
+!MESSAGE No resource is associated with key "ResultsViewAPI_append_resultset_error".
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:03:17.785
+!MESSAGE ResultsViewAPI_append_resultset_error possible args: {0}, {1}, {2}, {3}
+!STACK 0
+java.sql.SQLException: Invalid column type: getString not implemented for class oracle.jdbc.driver.T4CBlobAccessor
+	at oracle.jdbc.driver.Accessor.unimpl(Accessor.java:414)
+	at oracle.jdbc.driver.BlobAccessor.getString(BlobAccessor.java:335)
+	at oracle.jdbc.driver.OracleResultSetImpl.getString(OracleResultSetImpl.java:1297)
+	at org.eclipse.datatools.sqltools.result.internal.utils.SQLUtil.getObjectByTypeCoercion(SQLUtil.java:173)
+	at org.eclipse.datatools.sqltools.result.ResultSetObject.<init>(ResultSetObject.java:150)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstanceFactory.createResultSetObject(ResultInstanceFactory.java:79)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstance.moreResultSet(ResultInstance.java:127)
+	at org.eclipse.datatools.sqltools.result.ResultsViewAPI.appendResultSet(ResultsViewAPI.java:353)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.loopThroughResults(ResultSupportRunnable.java:572)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.handleSuccess(ResultSupportRunnable.java:419)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable$HandleSuccessJob.run(ResultSupportRunnable.java:302)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:14:33.397
+!MESSAGE No resource is associated with key "ResultsViewAPI_append_resultset_error".
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:14:33.398
+!MESSAGE ResultsViewAPI_append_resultset_error possible args: {0}, {1}, {2}, {3}
+!STACK 0
+java.sql.SQLException: Invalid column type: getString not implemented for class oracle.jdbc.driver.T4CBlobAccessor
+	at oracle.jdbc.driver.Accessor.unimpl(Accessor.java:414)
+	at oracle.jdbc.driver.BlobAccessor.getString(BlobAccessor.java:335)
+	at oracle.jdbc.driver.OracleResultSetImpl.getString(OracleResultSetImpl.java:1297)
+	at org.eclipse.datatools.sqltools.result.internal.utils.SQLUtil.getObjectByTypeCoercion(SQLUtil.java:173)
+	at org.eclipse.datatools.sqltools.result.ResultSetObject.<init>(ResultSetObject.java:150)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstanceFactory.createResultSetObject(ResultInstanceFactory.java:79)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstance.moreResultSet(ResultInstance.java:127)
+	at org.eclipse.datatools.sqltools.result.ResultsViewAPI.appendResultSet(ResultsViewAPI.java:353)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.loopThroughResults(ResultSupportRunnable.java:572)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.handleSuccess(ResultSupportRunnable.java:419)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable$HandleSuccessJob.run(ResultSupportRunnable.java:302)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:42:48.064
+!MESSAGE No resource is associated with key "ResultsViewAPI_append_resultset_error".
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:42:48.069
+!MESSAGE ResultsViewAPI_append_resultset_error possible args: {0}, {1}, {2}, {3}
+!STACK 0
+java.sql.SQLException: Invalid column type: getString not implemented for class oracle.jdbc.driver.T4CBlobAccessor
+	at oracle.jdbc.driver.Accessor.unimpl(Accessor.java:414)
+	at oracle.jdbc.driver.BlobAccessor.getString(BlobAccessor.java:335)
+	at oracle.jdbc.driver.OracleResultSetImpl.getString(OracleResultSetImpl.java:1297)
+	at org.eclipse.datatools.sqltools.result.internal.utils.SQLUtil.getObjectByTypeCoercion(SQLUtil.java:173)
+	at org.eclipse.datatools.sqltools.result.ResultSetObject.<init>(ResultSetObject.java:150)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstanceFactory.createResultSetObject(ResultInstanceFactory.java:79)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstance.moreResultSet(ResultInstance.java:127)
+	at org.eclipse.datatools.sqltools.result.ResultsViewAPI.appendResultSet(ResultsViewAPI.java:353)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.loopThroughResults(ResultSupportRunnable.java:572)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.handleSuccess(ResultSupportRunnable.java:419)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable$HandleSuccessJob.run(ResultSupportRunnable.java:302)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:44:26.456
+!MESSAGE No resource is associated with key "ResultsViewAPI_append_resultset_error".
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:44:26.457
+!MESSAGE ResultsViewAPI_append_resultset_error possible args: {0}, {1}, {2}, {3}
+!STACK 0
+java.sql.SQLException: Invalid column type: getString not implemented for class oracle.jdbc.driver.T4CBlobAccessor
+	at oracle.jdbc.driver.Accessor.unimpl(Accessor.java:414)
+	at oracle.jdbc.driver.BlobAccessor.getString(BlobAccessor.java:335)
+	at oracle.jdbc.driver.OracleResultSetImpl.getString(OracleResultSetImpl.java:1297)
+	at org.eclipse.datatools.sqltools.result.internal.utils.SQLUtil.getObjectByTypeCoercion(SQLUtil.java:173)
+	at org.eclipse.datatools.sqltools.result.ResultSetObject.<init>(ResultSetObject.java:150)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstanceFactory.createResultSetObject(ResultInstanceFactory.java:79)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstance.moreResultSet(ResultInstance.java:127)
+	at org.eclipse.datatools.sqltools.result.ResultsViewAPI.appendResultSet(ResultsViewAPI.java:353)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.loopThroughResults(ResultSupportRunnable.java:572)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.handleSuccess(ResultSupportRunnable.java:419)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable$HandleSuccessJob.run(ResultSupportRunnable.java:302)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:44:52.876
+!MESSAGE No resource is associated with key "ResultsViewAPI_append_resultset_error".
+
+!ENTRY org.eclipse.datatools.sqltools.result 4 0 2024-05-25 22:44:52.877
+!MESSAGE ResultsViewAPI_append_resultset_error possible args: {0}, {1}, {2}, {3}
+!STACK 0
+java.sql.SQLException: Invalid column type: getString not implemented for class oracle.jdbc.driver.T4CBlobAccessor
+	at oracle.jdbc.driver.Accessor.unimpl(Accessor.java:414)
+	at oracle.jdbc.driver.BlobAccessor.getString(BlobAccessor.java:335)
+	at oracle.jdbc.driver.OracleResultSetImpl.getString(OracleResultSetImpl.java:1297)
+	at org.eclipse.datatools.sqltools.result.internal.utils.SQLUtil.getObjectByTypeCoercion(SQLUtil.java:173)
+	at org.eclipse.datatools.sqltools.result.ResultSetObject.<init>(ResultSetObject.java:150)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstanceFactory.createResultSetObject(ResultInstanceFactory.java:79)
+	at org.eclipse.datatools.sqltools.result.internal.model.ResultInstance.moreResultSet(ResultInstance.java:127)
+	at org.eclipse.datatools.sqltools.result.ResultsViewAPI.appendResultSet(ResultsViewAPI.java:353)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.loopThroughResults(ResultSupportRunnable.java:572)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable.handleSuccess(ResultSupportRunnable.java:419)
+	at org.eclipse.datatools.sqltools.editor.core.result.ResultSupportRunnable$HandleSuccessJob.run(ResultSupportRunnable.java:302)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

@@ -75,6 +75,23 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required/>
         </div>
+        <div class="form-group">
+            <label for="doctor">Doctor Name</label>
+            <input type="text" id="doctor" name="doctor" required/>
+        </div>
+        
+        <div class="form-group">
+        <label for="department">Select Department</label>
+        <select id="department" name="department" required>
+            <option value="Triage">Triage</option>
+            <option value="Treatment Rooms">Treatment Rooms</option>
+            <option value="Resuscitation Area">Resuscitation Area</option>
+            <option value="Diagnostic Imaging">Diagnostic Imaging</option>
+            <option value="Laboratory">Laboratory</option>
+            <option value="Observation Area">Observation Area</option>
+            <option value="Psychiatric Emergency Services">Psychiatric Emergency Services</option>
+        </select>
+    </div>
         <input type="submit" value="Submit"/>
     </form>
 </body>
