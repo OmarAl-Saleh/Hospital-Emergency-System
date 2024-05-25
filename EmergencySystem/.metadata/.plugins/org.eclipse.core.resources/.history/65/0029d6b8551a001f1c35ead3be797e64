@@ -1,0 +1,37 @@
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		String source = request.getParameter("source");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String[] medicalHistory = request.getParameterValues("medicalHistory[]");
+        String[] chronicDiseases = request.getParameterValues("chronicDiseases[]");
+        String[] allergies = request.getParameterValues("allergies[]");
+     
+        Patient patient = new Patient(email, phoneNumber, firstName, lastName, dob, address, medicalHistory, chronicDiseases, allergies);
+        
+        try {
+			patient.insertPatient();
+			patient.generateNewCase();
+//			Patient p=Patient.selectPatient("0797573443");
+//			out.println(p.toString());
+			out.println("Done");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			out.println("exception"+e.getMessage());
+			e.printStackTrace();
+		}
+        
+
+        
+        
+    }
+	}
+
+

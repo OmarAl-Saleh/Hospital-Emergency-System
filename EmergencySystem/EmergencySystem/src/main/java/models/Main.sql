@@ -1,1 +1,1 @@
-select * from admission_officer;
+select * from case;

@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Officer Welcome Page</title>
+<head>Welcome to Officer Main Page</head>
+<body>
+
+<jsp:useBean id="off_signIn" type=models.Admission_Officer scope="session"></jsp:useBean>
+Result is : <jsp:getProperty property="name" name="off_signIn"/>
+</body>
+</html>

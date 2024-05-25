@@ -2,12 +2,18 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import models.Admission_Officer;
+import models.Case;
 
 /**
  * Servlet implementation class officer
@@ -30,7 +36,52 @@ public class officer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-        out.println("officer get servlet");
+	
+        // Sign in process
+		String Name = request.getParameter("name");
+        String password = request.getParameter("password");
+        RequestDispatcher success = request.getRequestDispatcher("officer_manage_cases.jsp");
+        RequestDispatcher failed = request.getRequestDispatcher("officer/sign-in.jsp");
+        Case[] cases=null;
+        
+        Admission_Officer off_signIn = null;
+		try {
+			off_signIn = Admission_Officer.selectAdmissionOfficer(Name, password);
+			 cases =Case.selectOfficerCases();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(off_signIn!=null)
+		{
+        	out.println("successfully sign in ");
+        	off_signIn.setCases(cases);
+        	
+        	
+        	// Create a session and set the off_signIn object in session scope
+            HttpSession session = request.getSession();
+            session.setAttribute("off_signIn", off_signIn);
+
+            // Forward to the sign-in JSP page
+            success.forward(request, response);
+        	
+		}
+		else {
+            // Sign in failed, generate alert and include the sign-in JSP
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Wrong User Name or Passowrd');");
+            out.println("document.getElementById('name').value = '" + Name + "';");
+            out.println("document.getElementById('password').value = '" + password + "';");
+            out.println("</script>");
+            failed.include(request, response);
+        }
+		 
+        
+        
 	}
 
 	/**
@@ -39,8 +90,21 @@ public class officer extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		PrintWriter out = response.getWriter();
-        out.println("officer post servlet");
+		
+        String Name = request.getParameter("name");
+        String password = request.getParameter("password");
+        RequestDispatcher dispatcher=request.getRequestDispatcher("officer/sign-in.jsp");
+        Admission_Officer Off = new Admission_Officer(Name,password);
+        try {
+			Off.insertAdmissionOfficer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        dispatcher.forward(request, response);
+        
+       
 	}
 
 }

@@ -95,8 +95,25 @@ public void admitPatient(String number)
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 	  }
+}
+
+public boolean hourValidate(String number)
+{
+	for(int i=0 ; i<this.cases.length;i++)
+	  {
+		  if(cases[i].getCaseNumber().equals(number))
+			  
+			  
+	      if(cases[i].hour(this.submit_Date))
+	      {	  
+	    	  this.cancelCase(number);
+	    	  return true;
+	      }
+	  }
+	return false;
+
 }
 
 
@@ -134,6 +151,8 @@ public void admitPatient(String number)
 	public void setSubmit_Date(Date submit_Date) {
 		this.submit_Date = submit_Date;
 	}
+	
+	
 
 	
 	// Method to insert a new admission officer into the database

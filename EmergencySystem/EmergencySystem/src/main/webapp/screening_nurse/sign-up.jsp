@@ -25,6 +25,13 @@
             color: #333;
             margin-bottom: 20px;
         }
+        
+         h5 {
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
+            font-size: 14px;
+        }
 
         label {
             display: block;
@@ -77,5 +84,7 @@
         </div>
         <input type="submit" value="Submit"/>
     </form>
+        <h5>Note: after submission, you will be forwarded to the sign-in page to  rewrite the username and password</h5>
+    
 </body>
 </html>

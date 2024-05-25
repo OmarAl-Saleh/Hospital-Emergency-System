@@ -52,6 +52,17 @@ public class Case {
         //this.submitDate = new Date();
     }
     
+    
+    public boolean hour(Date officer)
+    {
+    	long difference=officer.getTime()-this.submitDate.getTime();
+    	
+    	difference= difference/(60*60*1000);
+    	
+    	return difference>1;
+    	
+    }
+    
     public boolean isPresent() {
 		return present;
 	}
@@ -150,7 +161,7 @@ public class Case {
 	
 	public void setStatusCanceled()
 	{
-		this.setStatus("Cancelled");
+		this.setStatus("Canceled");
 	}
 	
 	

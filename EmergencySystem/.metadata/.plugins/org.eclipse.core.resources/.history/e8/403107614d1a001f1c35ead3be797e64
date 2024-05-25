@@ -1,0 +1,83 @@
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import models.Admission_Officer;
+
+/**
+ * Servlet implementation class officer
+ */
+@WebServlet("/officer")
+public class officer extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public officer() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		
+        // check user Name and Passwords
+		String Name = request.getParameter("name");
+        String password = request.getParameter("password");
+        RequestDispatcher dis_signIn = request.getRequestDispatcher("officer/sign-in.jsp");
+        Admission_Officer off_signIn = null;
+		try {
+			off_signIn = Admission_Officer.selectAdmissionOfficer(Name, password);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(off_signIn.getName().equals(Name) && off_signIn.getPassword().equals(password))
+        	out.println("successfully sign in ");
+		else 
+		 out.println("failed");
+        
+        
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		PrintWriter out = response.getWriter();
+		
+        String Name = request.getParameter("name");
+        String password = request.getParameter("password");
+        RequestDispatcher dispatcher=request.getRequestDispatcher("officer/sign-in.jsp");
+        Admission_Officer Off = new Admission_Officer(Name,password);
+        try {
+			Off.insertAdmissionOfficer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        dispatcher.forward(request, response);
+        
+       
+	}
+
+}

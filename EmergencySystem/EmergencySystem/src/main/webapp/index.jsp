@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to hospital emergency system</h1>
+        <h1> hospital emergency system</h1>
     </header>
     <main>
         <form action="log_in.jsp" method="get">
