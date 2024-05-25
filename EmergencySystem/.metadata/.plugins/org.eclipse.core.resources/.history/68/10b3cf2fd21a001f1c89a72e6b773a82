@@ -335,7 +335,7 @@ public class Case {
     }
 
 
- // Method to retrieve cases from the database by phone number
+    // Method to retrieve cases from the database by phone number
     public static Case[] selectCasesByPhoneNumber(String phoneNumber) throws SQLException {
         String caseSql = "SELECT * FROM case WHERE phone_number = ?";
         List<Case> caseList = new ArrayList<>();
@@ -354,9 +354,8 @@ public class Case {
                 String priority = rs.getString("priority");
                 String department = rs.getString("department");
                 boolean present = rs.getBoolean("present");
-                String followDoctor = rs.getString("follow_doctor");
 
-                Case c = new Case(status, treatment, priority, department, phoneNumber, present, followDoctor);
+                Case c = new Case(status, treatment, priority, department, phoneNumber, present);
                 c.caseNumber = caseNumber;
                 c.submitDate = new Date(submitDate.getTime());
 
@@ -367,11 +366,9 @@ public class Case {
         // Convert list to array
         return caseList.toArray(new Case[0]);
     }
-
     
- // Method to retrieve cases from the database that are present and not closed
     public static Case[] selectAdmittedCases() throws SQLException {
-        String caseSql = "SELECT * FROM case WHERE present = 1 AND status <> 'Closed'";
+        String caseSql = "SELECT * FROM case WHERE present = 1 and status <> 'Closed' ";
         List<Case> casesList = new ArrayList<>();
 
         try (Connection conn = database.connect();
@@ -388,9 +385,8 @@ public class Case {
                 String department = rs.getString("department");
                 String phoneNumber = rs.getString("phone_number");
                 boolean present = rs.getBoolean("present");
-                String followDoctor = rs.getString("follow_doctor");
 
-                Case c = new Case(status, treatment, priority, department, phoneNumber, present, followDoctor);
+                Case c = new Case(status, treatment, priority, department, phoneNumber, present);
                 c.caseNumber = caseNumber;
                 c.submitDate = new Date(submitDate.getTime());
 
@@ -400,17 +396,15 @@ public class Case {
 
         return casesList.toArray(new Case[0]);
     }
-
     
     
- // Method to retrieve cases from the database by department name that are present and not closed
     public static Case[] selectDepartmentCases(String departmentName) throws SQLException {
         String caseSql = "SELECT * FROM case WHERE present = 1 AND status <> 'Closed' AND department = ?";
         List<Case> casesList = new ArrayList<>();
 
         try (Connection conn = database.connect();
              PreparedStatement caseStmt = conn.prepareStatement(caseSql)) {
-
+            
             caseStmt.setString(1, departmentName);
             ResultSet rs = caseStmt.executeQuery();
 
@@ -423,9 +417,8 @@ public class Case {
                 String department = rs.getString("department");
                 String phoneNumber = rs.getString("phone_number");
                 boolean present = rs.getBoolean("present");
-                String followDoctor = rs.getString("follow_doctor");
 
-                Case c = new Case(status, treatment, priority, department, phoneNumber, present, followDoctor);
+                Case c = new Case(status, treatment, priority, department, phoneNumber, present);
                 c.caseNumber = caseNumber;
                 c.submitDate = new Date(submitDate.getTime());
 
@@ -437,9 +430,10 @@ public class Case {
     }
 
 
+
     
     
- // Method to retrieve cases from the database with status not equal to "Closed"
+ // Method to retrieve cases from the database with status not equal to "Canceled"
     public static Case[] selectOfficerCases() throws SQLException {
         String caseSql = "SELECT * FROM case WHERE status <> 'Closed'";
         List<Case> casesList = new ArrayList<>();
@@ -458,9 +452,8 @@ public class Case {
                 String department = rs.getString("department");
                 String phoneNumber = rs.getString("phone_number");
                 boolean present = rs.getBoolean("present");
-                String followDoctor = rs.getString("follow_doctor");
 
-                Case c = new Case(status, treatment, priority, department, phoneNumber, present, followDoctor);
+                Case c = new Case(status, treatment, priority, department, phoneNumber, present);
                 c.caseNumber = caseNumber;
                 c.submitDate = new Date(submitDate.getTime());
 
@@ -469,7 +462,8 @@ public class Case {
         }
 
         // Convert the list to an array
-        return casesList.toArray(new Case[0]);
+        Case[] casesArray = casesList.toArray(new Case[0]);
+        return casesArray;
     }
 
 

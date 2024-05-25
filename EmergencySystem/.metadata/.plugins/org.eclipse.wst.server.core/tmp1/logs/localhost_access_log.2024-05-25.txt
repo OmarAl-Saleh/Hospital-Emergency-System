@@ -397,3 +397,7 @@
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:41:33 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-in HTTP/1.1" 200 4768
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:41:51 +0300] "GET /EmergencySystem/patient?source=sign-in&email=hashem%40gmail.com&phoneNumber=0000&sub_patient=on&sub_patient_name=omar&sub_patient_relation=college&symptoms%5B%5D=hgdffgs&symptoms%5B%5D=gsgfgfs&injury_name=&img= HTTP/1.1" 200 1727
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:42:20 +0300] "GET /EmergencySystem/patient?source=sign-in&email=hashem%40gmail.com&phoneNumber=0000&sub_patient=on&sub_patient_name=gfsgfds&sub_patient_relation=gfsgsgsgsggs&symptoms%5B%5D=hgdffgs&injury_name=&img= HTTP/1.1" 200 1727
+127.0.0.1 - - [25/May/2024:22:43:44 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [25/May/2024:22:43:44 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
+0:0:0:0:0:0:0:1 - - [25/May/2024:22:43:53 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-in HTTP/1.1" 200 4768
+0:0:0:0:0:0:0:1 - - [25/May/2024:22:44:09 +0300] "GET /EmergencySystem/patient?source=sign-in&email=hashem%40gmail.com&phoneNumber=0000&sub_patient=on&sub_patient_name=fffffffffff&sub_patient_relation=ssssssssssssssssss&symptoms%5B%5D=fdsadfasfsafasf&injury_name=&img= HTTP/1.1" 200 1727

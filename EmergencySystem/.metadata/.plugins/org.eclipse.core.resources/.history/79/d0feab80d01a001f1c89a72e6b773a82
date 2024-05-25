@@ -166,13 +166,6 @@ public class Patient {
          {
            	if (cases[i].getCaseNumber().equals(caseNumber)) {
            		cases[i].setStatusNew();
-           		
-           		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
            	}
            
          }
@@ -183,13 +176,6 @@ public class Patient {
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusRejected();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
           	}
           
         }
@@ -200,13 +186,6 @@ public class Patient {
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusInitialAssessment();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
           	}
           
         }
@@ -217,13 +196,6 @@ public class Patient {
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusAsigned();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
           	}
           
         }
@@ -234,13 +206,6 @@ public class Patient {
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusClosed();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
           	}
           
         }
@@ -251,30 +216,6 @@ public class Patient {
         {
           	if (cases[i].getCaseNumber().equals(caseNumber)) {
           		cases[i].setStatusTransferred();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-          	}
-          
-        }
-    }
-
-    public void setStatusCanceled(String caseNumber) {
-    	for(int i=0;i<this.cases.length;i++)
-        {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
-          		cases[i].setStatusCanceled();
-          		
-          		try {
-					cases[i].updateStatus();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
           	}
           
         }
