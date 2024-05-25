@@ -1,0 +1,225 @@
+<%@ page import="java.util.*, models.Screening_Nurse, models.Case" %>
+<%@ page session="true" %>
+<%
+    // Retrieve the Screening_Nurse object from the session
+    Screening_Nurse nurse = (Screening_Nurse) session.getAttribute("nurse");
+
+if (nurse == null) {
+    response.sendRedirect("screening_nurse/sign-in.jsp");
+    return;
+}
+
+    // Get the list of cases
+    Case[] cases = nurse.getCases();
+
+    // Check if a case number is provided for actions
+    String caseNumber = request.getParameter("caseNumber");
+    String action = request.getParameter("action");
+    String priority = request.getParameter("priority");
+    String department = request.getParameter("department");
+
+    String updateMessage = "";
+
+    if (caseNumber != null && action != null) {
+        switch (action) {
+            case "assign_priority":
+                if (priority != null) {
+                    nurse.SetCasePriority(caseNumber, priority);
+                    updateMessage = "Case " + caseNumber + " has been assigned priority " + priority + ".";
+                }
+                break;
+            case "assign_department":
+                if (department != null) {
+                    nurse.setCaseDepartment(caseNumber, department);
+                    updateMessage = "Case " + caseNumber + " has been assigned to " + department + ".";
+                }
+                break;
+            case "transfer":
+                nurse.TransferredCase(caseNumber);
+                updateMessage = "Case " + caseNumber + " has been transferred.";
+                break;
+        }
+    }
+
+    // Refresh the cases list after actions
+    cases = nurse.getCases();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Manage Cases - Screening Nurse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px; /* Increased max-width */
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%; /* Ensure table takes full width */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px; /* Increased padding for better spacing */
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        th.actions {
+            width: 35%; /* Set width for the actions column */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 15px; /* Added margin for spacing */
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+
+        .action-button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%; /* Ensure buttons take full width */
+        }
+
+        .update-box {
+            background-color: #e7f3fe;
+            color: #31708f;
+            border: 1px solid #bce8f1;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .action-form {
+            display: flex-block;
+            width: 100%; /* Ensure forms take full width */
+            margin-bottom: 10px; /* Added margin for spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Cases - Screening Nurse</h1>
+        <table>
+            <tr>
+                <th>Case Number</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Actions</th>
+                <th>Patient is Present</th>
+            </tr>
+            <% if (cases != null) { %>
+                <% for (Case c : cases) { %>
+                    <tr>
+                        <td><%= c.getCaseNumber() %></td>
+                        <td><%= c.getStatus() %></td>
+                        <td><%= c.getPriority() %></td>
+                        <td>
+                            <form action="screening_nurse_manage_cases.jsp" method="post" class="action-form">
+                                <input type="hidden" name="caseNumber" value="<%= c.getCaseNumber() %>"/>
+                                <input type="hidden" name="action" value="assign_priority"/>
+                                <label for="priority">Priority:</label>
+                                <select name="priority" id="priority">
+                                    <option value="Emergency">1 - Emergency</option>
+                                    <option value="Very urgent">2 - Very urgent</option>
+                                    <option value="Urgent">3 - Urgent</option>
+                                    <option value="Less urgent">4 - Less urgent</option>
+                                    <option value="Non-urgent">5 - Non-urgent</option>
+                                </select>
+                                <button type="submit" class="action-button">Assign Priority</button>
+                            </form>
+                            <form action="screening_nurse_manage_cases.jsp" method="post" class="action-form">
+                                <input type="hidden" name="caseNumber" value="<%= c.getCaseNumber() %>"/>
+                                <input type="hidden" name="action" value="assign_department"/>
+                                <label for="department">Department:</label>
+                                <select name="department" id="department">
+                                    <option value="Triage">Triage</option>
+                                    <option value="Treatment Rooms">Treatment Rooms</option>
+                                    <option value="Resuscitation Area">Resuscitation Area</option>
+                                    <option value="Diagnostic Imaging">Diagnostic Imaging</option>
+                                    <option value="Laboratory">Laboratory</option>
+                                    <option value="Observation Area">Observation Area</option>
+                                    <option value="Psychiatric Emergency Services">Psychiatric Emergency Services</option>
+                                </select>
+                                <button type="submit" class="action-button">Assign Department</button>
+                            </form>
+                            <form action="screening_nurse_manage_cases.jsp" method="post" class="action-form">
+                                <input type="hidden" name="caseNumber" value="<%= c.getCaseNumber() %>"/>
+                                <input type="hidden" name="action" value="transfer"/>
+                                <button type="submit" class="action-button">Transfer</button>
+                            </form>
+                        </td>
+                        <td>
+                            <input type="checkbox" disabled <%= c.isPresent() ? "checked" : "" %>/>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">No cases available</td>
+                </tr>
+            <% } %>
+        </table>
+        <% if (!updateMessage.isEmpty()) { %>
+            <div class="update-box">
+                <%= updateMessage %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

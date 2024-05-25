@@ -5,7 +5,7 @@
     Admission_Officer officer = (Admission_Officer) session.getAttribute("off_signIn");
 
     if (officer == null) {
-        response.sendRedirect("sign-in.jsp");
+        response.sendRedirect("officer/sign-in.jsp");
         return;
     }
 

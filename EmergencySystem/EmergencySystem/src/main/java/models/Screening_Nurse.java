@@ -139,7 +139,7 @@ public class Screening_Nurse {
 		return cases;
 	}
 
-	public void setPatients(Case[] cases) {
+	public void setCases(Case[] cases) {
 		this.cases = cases;
 	}
 
@@ -175,6 +175,26 @@ public class Screening_Nurse {
             }
         }
         return nurse;
+    }
+    
+   public static String getPriorityColor(String priority) {
+        if (priority == null) {
+            return "transparent";
+        }
+        switch (priority) {
+            case "Emergency":
+                return "red";
+            case "Very urgent":
+                return "orange";
+            case "Urgent":
+                return "yellow";
+            case "Less urgent":
+                return "green";
+            case "Non-urgent":
+                return "blue";
+            default:
+                return "transparent";
+        }
     }
 	
 }
