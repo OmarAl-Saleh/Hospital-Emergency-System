@@ -1,1 +1,1 @@
-select * from sub_patient;
+select *  from case;

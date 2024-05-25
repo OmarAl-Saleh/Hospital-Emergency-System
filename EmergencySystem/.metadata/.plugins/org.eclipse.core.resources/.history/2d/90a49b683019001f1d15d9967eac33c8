@@ -1,5 +1,0 @@
-create table patient_medical_history(
-phone_number varchar(20),
-medical_history varchar(200),
-FOREIGN KEY phone_number REFERENCES patient(phone_number)
-);

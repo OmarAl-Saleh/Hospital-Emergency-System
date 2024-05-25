@@ -1,4 +1,0 @@
-ALTER TABLE case
-ADD COLUMN phone VARCHAR(20);
-
-

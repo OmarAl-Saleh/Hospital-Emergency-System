@@ -1,2 +1,0 @@
-ALTER TABLE patient 
-drop column medical_history;

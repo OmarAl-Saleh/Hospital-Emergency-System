@@ -1,0 +1,2 @@
+INSERT INTO department_nurse 
+VALUES ('nurse1', 'password1', 'Dr. Smith', 'Emergency Department');

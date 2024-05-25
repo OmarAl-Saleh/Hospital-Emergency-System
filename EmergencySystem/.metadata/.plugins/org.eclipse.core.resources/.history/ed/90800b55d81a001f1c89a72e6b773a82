@@ -1,0 +1,103 @@
+<%@ page import="java.util.*, models.Department_Nurse, models.Case" %>
+<%@ page session="true" %>
+<%
+    // Retrieve the Department_Nurse object from the session
+    Department_Nurse nurse = (Department_Nurse) session.getAttribute("department_nurse");
+
+    if (nurse == null) {
+        response.sendRedirect("sign-in.jsp");
+        return;
+    }
+
+    // Get the list of cases
+    Case[] cases = nurse.getCases();
+
+    // Check if a case number is provided for actions
+    String caseNumber = request.getParameter("caseNumber");
+    String action = request.getParameter("action");
+
+    String updateMessage = "";
+
+    if (caseNumber != null && action != null) {
+        switch (action) {
+            case "close":
+                String treatment = request.getParameter("treatment");
+                nurse.ClosedCase(caseNumber, treatment);
+                updateMessage = "Case " + caseNumber + " has been closed.";
+                break;
+            case "transfer":
+                nurse.TransferredCase(caseNumber);
+                updateMessage = "Case " + caseNumber + " has been transferred.";
+                break;
+        }
+    }
+
+    // Refresh the cases list after actions
+    cases = nurse.getCases();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Cases</title>
+    <style>
+        /* CSS styles */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Cases</h1>
+        <table>
+            <!-- Table header -->
+            <tr>
+                <th>Case Number</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>Treatment</th>
+            </tr>
+            <% if (cases != null) { %>
+                <!-- Loop through cases -->
+                <% for (Case c : cases) { %>
+                    <tr>
+                        <td><%= c.getCaseNumber() %></td>
+                        <td><%= c.getStatus() %></td>
+                        <td>
+                            <!-- Form for closing the case -->
+                            <form action="department_nurse_manage_cases.jsp" method="post" class="action-form">
+                                <input type="hidden" name="caseNumber" value="<%= c.getCaseNumber() %>"/>
+                                <input type="hidden" name="action" value="close"/>
+                                <select name="treatment">
+                                    <!-- Options for treatment -->
+                                    <option value="">Select Treatment</option>
+                                    <option value="Discharge home">Discharge home with instructions for follow-up care</option>
+                                    <option value="Admission">Admission to the hospital for further observation or treatment</option>
+                                    <option value="Transfer">Transfer to another hospital for specialized care</option>
+                                    <option value="Referral">Referral to outpatient services</option>
+                                </select>
+                                <button type="submit" class="action-button">Close</button>
+                            </form>
+                            <!-- Form for transferring the case -->
+                            <form action="department_nurse_manage_cases.jsp" method="post" class="action-form">
+                                <input type="hidden" name="caseNumber" value="<%= c.getCaseNumber() %>"/>
+                                <input type="hidden" name="action" value="transfer"/>
+                                <button type="submit" class="action-button">Transfer</button>
+                            </form>
+                        </td>
+                        <td><%= c.getTreatment() %></td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4">No cases available</td>
+                </tr>
+            <% } %>
+        </table>
+        <!-- Display update message -->
+        <% if (!updateMessage.isEmpty()) { %>
+            <div class="update-box">
+                <%= updateMessage %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

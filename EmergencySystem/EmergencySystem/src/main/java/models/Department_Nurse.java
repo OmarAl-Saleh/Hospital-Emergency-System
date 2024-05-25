@@ -8,6 +8,8 @@ import java.sql.SQLException;
 public class Department_Nurse {
 
 
+	
+
 	private String name;
 	private String password;
 	private String DoctorName; 
@@ -25,7 +27,7 @@ public class Department_Nurse {
 		this.cases = cases;
 	}
 	
-	public Department_Nurse(String name, String password,String DepartmentName, String doctorName) {
+	public Department_Nurse(String name, String password, String doctorName,String DepartmentName) {
 		super();
 		this.name = name;
 		this.password = password;
@@ -34,6 +36,13 @@ public class Department_Nurse {
 		
 	}
 	
+	public String getDepartmentName() {
+		return DepartmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		DepartmentName = departmentName;
+	}
 	
 	public void TransferredCase(String number) {
 		for(int i=0;i<this.cases.length;i++)
@@ -82,6 +91,24 @@ public class Department_Nurse {
 					e.printStackTrace();
 				}
 		  }
+	  }
+	
+	public void setCaseFollowDoctor(String number,String doctorName) {
+		 
+		for(int i=0;i<this.cases.length;i++)
+	      {
+	        	if (cases[i].getCaseNumber().equals(number)) {
+	        		cases[i].setFollowDoctor(doctorName);
+	        		try {
+						
+						cases[i].updateFollow_Doctor();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	        	}
+	        	
+	      }
 	  }
 
 	public String getName() {

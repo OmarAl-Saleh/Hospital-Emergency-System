@@ -401,3 +401,17 @@
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:43:44 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:43:53 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-in HTTP/1.1" 200 4768
 0:0:0:0:0:0:0:1 - - [25/May/2024:22:44:09 +0300] "GET /EmergencySystem/patient?source=sign-in&email=hashem%40gmail.com&phoneNumber=0000&sub_patient=on&sub_patient_name=fffffffffff&sub_patient_relation=ssssssssssssssssss&symptoms%5B%5D=fdsadfasfsafasf&injury_name=&img= HTTP/1.1" 200 1727
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:32:09 +0300] "GET /EmergencySystem/log_in.jsp?you-are=department-nurse&sign=sign-in HTTP/1.1" 200 2932
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:32:19 +0300] "GET /EmergencySystem/department_nurse?source=sign-in&name=OMAR+AL-SALEH&password=1234&doctor=hashem&department=Triage HTTP/1.1" 200 163
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:46:31 +0300] "GET /EmergencySystem/log_in.jsp?you-are=department-nurse&sign=sign-in HTTP/1.1" 200 2100
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:46:39 +0300] "GET /EmergencySystem/department_nurse?source=sign-in&name=OMAR+AL-SALEH&password=1234 HTTP/1.1" 200 649
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:05 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:08 +0300] "GET /EmergencySystem/log_in.jsp?you-are=department-nurse&sign=sign-in HTTP/1.1" 200 2100
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:15 +0300] "GET /EmergencySystem/department_nurse?source=sign-in&name=OMAR+AL-SALEH&password=1234 HTTP/1.1" 200 2405
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:31 +0300] "GET /EmergencySystem/log_in.jsp?you-are=screening-nurse&sign=sign-in HTTP/1.1" 200 1893
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:36 +0300] "GET /EmergencySystem/screening_nurse?source=sign-in&name=OMAR+AL-SALEH&password=1234 HTTP/1.1" 200 13167
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:51:44 +0300] "GET /EmergencySystem/log_in.jsp?you-are=department-nurse&sign=sign-in HTTP/1.1" 200 2100
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:55:37 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:55:41 +0300] "GET /EmergencySystem/log_in.jsp?you-are=department-nurse&sign=sign-up HTTP/1.1" 200 3050
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:55:53 +0300] "POST /EmergencySystem/department_nurse HTTP/1.1" 200 2100
+0:0:0:0:0:0:0:1 - - [25/May/2024:23:57:05 +0300] "GET /EmergencySystem/department_nurse?source=sign-in&name=OMAR+AL-SALEH&password=1234 HTTP/1.1" 200 2405

@@ -41,9 +41,6 @@ public class department_nurse extends HttpServlet {
 		        // Sign in process
 				String Name = request.getParameter("name");
 		        String password = request.getParameter("password");
-		        String doctorName = request.getParameter("doctor");
-		        String departmentName = request.getParameter("department");
-
 		        RequestDispatcher success = request.getRequestDispatcher("department_nurse_manage_cases.jsp");
 		        RequestDispatcher failed = request.getRequestDispatcher("department_nurse/sign-in.jsp");
 		        Case[] cases=null;
@@ -51,7 +48,7 @@ public class department_nurse extends HttpServlet {
 		        Department_Nurse nurse = null;
 				try {
 					nurse= Department_Nurse.selectDepartmentNurse(Name, password);
-					 cases =Case.selectDepartmentCases(departmentName);
+					 cases =Case.selectDepartmentCases(nurse.getDepartmentName());
 					
 					
 					
@@ -95,7 +92,7 @@ public class department_nurse extends HttpServlet {
 				
 		        String Name = request.getParameter("name");
 		        String password = request.getParameter("password");
-		        String doctorName = request.getParameter("doctor");
+		        String doctorName = request.getParameter("doctor");// I reflex them to solve bug
 		        String departmentName = request.getParameter("department");
 		        RequestDispatcher dispatcher=request.getRequestDispatcher("department_nurse/sign-in.jsp");
 		        Department_Nurse nurse = new Department_Nurse(Name,password,doctorName,departmentName);

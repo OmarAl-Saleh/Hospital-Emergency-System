@@ -1,5 +1,0 @@
-create table sub_patient_symptom(
-symptom varchar(20),
-injured_kind varchar(200),
-FOREIGN KEY (injured_kind) REFERENCES sub_patient(injured_kind)
-);
