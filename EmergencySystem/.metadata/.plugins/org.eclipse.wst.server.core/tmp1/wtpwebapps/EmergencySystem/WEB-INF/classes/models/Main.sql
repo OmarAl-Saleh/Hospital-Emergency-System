@@ -1,1 +1,1 @@
-select *  from case;
+delete from patient       ;

@@ -1,2 +1,0 @@
-alter table department_nurse
-add department_name varchar(50);

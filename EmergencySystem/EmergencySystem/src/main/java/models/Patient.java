@@ -5,6 +5,8 @@ import java.util.Arrays;
 //import java.util.Date;
 
 public class Patient {
+	
+
 	private String email;
 	private String phoneNumber;
 	private String firstName;
@@ -83,6 +85,14 @@ public class Patient {
 			e.printStackTrace();
 		}
     }
+    
+    public Case[] getCases() {
+		return cases;
+	}
+
+	public void setCases(Case[] cases) {
+		this.cases = cases;
+	}
     
     public void setCaseDepartment(String department, String caseNumber) {
         for(int i=0;i<this.cases.length;i++)
@@ -164,7 +174,7 @@ public class Patient {
     public void setStatusNew(String caseNumber) {
     	 for(int i=0;i<this.cases.length;i++)
          {
-           	if (cases[i].getCaseNumber().equals(caseNumber)) {
+           	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
            		cases[i].setStatusNew();
            		
            		try {
@@ -181,7 +191,7 @@ public class Patient {
     public void setStatusRejected(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
           		cases[i].setStatusRejected();
           		
           		try {
@@ -198,7 +208,7 @@ public class Patient {
     public void setStatusInitialAssessment(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
           		cases[i].setStatusInitialAssessment();
           		
           		try {
@@ -215,7 +225,7 @@ public class Patient {
     public void setStatusAsigned(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
           		cases[i].setStatusAsigned();
           		
           		try {
@@ -232,7 +242,7 @@ public class Patient {
     public void setStatusClosed(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
           		cases[i].setStatusClosed();
           		
           		try {
@@ -249,7 +259,7 @@ public class Patient {
     public void setStatusTransferred(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber)&& cases[i].isPresent()==false) {
           		cases[i].setStatusTransferred();
           		
           		try {
@@ -266,7 +276,7 @@ public class Patient {
     public void setStatusCanceled(String caseNumber) {
     	for(int i=0;i<this.cases.length;i++)
         {
-          	if (cases[i].getCaseNumber().equals(caseNumber)) {
+          	if (cases[i].getCaseNumber().equals(caseNumber) && cases[i].isPresent()==false) {
           		cases[i].setStatusCanceled();
           		
           		try {
@@ -287,12 +297,27 @@ public class Patient {
 	
 	public void setSubPatient(String name, String relationship, String[] symptoms, boolean injured, String injuredKind) {
 		patient=new subPatient(name,relationship,symptoms,injured,injuredKind,this.phoneNumber);
+		if(!injured)
+		{	
 		try {
 			patient.insertSubPatient();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+	}
+	
+	public void setSubPatientImage(byte[] img)
+	{
+		patient.setInjuryImage(img);
+		try {
+			patient.insertSubPatient();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

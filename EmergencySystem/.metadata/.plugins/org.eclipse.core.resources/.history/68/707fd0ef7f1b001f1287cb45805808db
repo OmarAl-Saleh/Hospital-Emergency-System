@@ -1,0 +1,210 @@
+<%@ page import="java.util.*, java.io.*,  models.Patient"%>
+<%@ page session="true"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+
+<%
+Patient patient = (Patient) session.getAttribute("patient_signIn");
+if (patient == null) {
+	response.sendRedirect("patient/sign-in.jsp");
+	return;
+}
+patient.generateNewCase();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 20px;
+}
+
+.container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 800px;
+	margin: auto;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ddd;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+	color: #555;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"]
+	{
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type="submit"], button {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-size: 16px;
+	margin-right: 10px; /* Added margin for spacing */
+}
+
+input[type="submit"]:hover, button:hover {
+	background-color: #45a049;
+}
+
+.action-button {
+	margin-right: 10px;
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+.update-box {
+	background-color: #e7f3fe;
+	color: #31708f;
+	border: 1px solid #bce8f1;
+	padding: 15px;
+	margin-top: 15px;
+	border-radius: 4px;
+}
+
+.action-form {
+	display: inline;
+	margin-right: 10px; /* Added margin for spacing */
+}
+</style>
+</head>
+<body>
+	<h1>Case number: </h1>
+	<p><% out.print(patient.toString());  %></p>
+	
+	<form action="patient_edit" method="get">
+        <input type="submit" name="cancelCase" value="cancel case">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="email">Enter your email</label>
+        <input type="email" id="email" name="email"/>
+        <input type="submit" name="changeEmail" value="Change email">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="phoneNumber">Enter your Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber"/>
+        <input type="submit" name="changeNumber" value="Change phone number">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName"/>
+        <input type="submit" name="changeFirstName" value="Change first name">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName"/>
+        <input type="submit" name="changeLastName" value="Change last name">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" />
+        <input type="submit" name="changeDob" value="Change dob">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="medicalHistory">Medical History</label>
+	<textarea name="medicalHistory[]" required></textarea>
+        <input type="submit" name="changeHistory" value="Change history">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="chronicDiseases">Chronic Diseases</label>
+	<textarea name="chronicDiseases[]" required></textarea>
+        <input type="submit" name="changeChronic" value="Change chronic">
+	</form>
+	
+	<form action="patient_edit" method="get">
+	<label for="allergies">Allergies</label>
+	<textarea name="allergies[]" required></textarea>
+        <input type="submit" name="changeAllergy" value="Change allergy">
+	</form>
+	
+	<form>
+	<label>Check if you are submitting this case on behalf of someone else</label>
+		<input type="checkbox" name="sub_patient" />
+    <div id="patient-info" class="hidden-section">
+        <br>
+        <label>Enter Patient Name</label>
+        <input type="text" name="sub_patient_name"/>
+        <br>
+        <label>Enter Patient Relation</label>
+        <input type="text" name="sub_patient_relation"/>
+        
+        <br>
+        <label for="symptoms">symptoms</label>
+        <br>
+        <div id="subsymptomscontainer">
+            <textarea name="symptoms[]"></textarea>
+        </div>
+        <br>
+        <button type="button" class="add-button" onclick="addField('subsymptomscontainer', 'symptoms')">Add Another symptom</button>
+    <label>is the patient injured?</label>
+    <input type="checkbox" name="injured" />  
+    <div id="injury" class="hidden-section">
+    	<br>
+        <label>Enter injury</label>
+        <input type="text" name="injury_name"/>
+        <br>
+        <label for="img">injury image:</label>
+  		<input type="file" id="img" name="img" accept="image/*">
+ 	 	<br>
+    </div> 
+    </div>
+    <br>
+    <input type="submit" name="changeSub" value="change sub patient" />
+	</form>
+</body>
+</html>

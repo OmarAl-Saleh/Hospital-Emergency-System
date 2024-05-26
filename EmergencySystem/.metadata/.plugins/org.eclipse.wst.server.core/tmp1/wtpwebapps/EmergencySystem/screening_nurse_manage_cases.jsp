@@ -38,6 +38,10 @@
                 nurse.TransferredCase(caseNumber);
                 updateMessage = "Case " + caseNumber + " has been transferred.";
                 break;
+            
+            case "sign_out":
+            	response.sendRedirect("index.jsp");
+            	return;
         }
     }
 
@@ -217,6 +221,12 @@
                 </tr>
             <% } %>
         </table>
+        
+        <form action="patient_manage_cases.jsp" method="post" class="action-form">
+                        <input type="hidden" name="caseNumber" value="sign_out"/>
+                        <input type="hidden" name="action" value="sign_out"/>
+                        <button type="submit" class="action-button"> Sign out </button>
+                    </form>
         <% if (!updateMessage.isEmpty()) { %>
             <div class="update-box">
                 <%= updateMessage %>

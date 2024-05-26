@@ -1,0 +1,2 @@
+alter table sub_patient_symptom
+MODIFY symptom varchar(200)

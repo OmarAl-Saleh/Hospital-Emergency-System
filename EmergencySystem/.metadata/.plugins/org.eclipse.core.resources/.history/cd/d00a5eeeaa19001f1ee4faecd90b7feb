@@ -1,2 +1,0 @@
-ALTER TABLE case 
-add present NUMBER(1);

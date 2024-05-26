@@ -119,6 +119,10 @@ public class subPatient {
 
             conn.commit();
         } 
+        catch (SQLException e) {
+        	System.out.println(e.getMessage()+"from subPatient method");
+    } 
+        
     }
 
     

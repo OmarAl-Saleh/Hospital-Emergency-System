@@ -337,7 +337,7 @@ public class Case {
 
  // Method to retrieve cases from the database by phone number
     public static Case[] selectCasesByPhoneNumber(String phoneNumber) throws SQLException {
-        String caseSql = "SELECT * FROM case WHERE phone_number = ?";
+        String caseSql = "SELECT * FROM case WHERE phone_number = ? ";
         List<Case> caseList = new ArrayList<>();
 
         try (Connection conn = database.connect();
