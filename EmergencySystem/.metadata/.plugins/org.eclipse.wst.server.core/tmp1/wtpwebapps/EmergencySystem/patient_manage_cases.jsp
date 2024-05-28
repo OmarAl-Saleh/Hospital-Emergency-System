@@ -159,7 +159,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Manage Cases</h1>
+    <h1>Patient Profile</h1>
 
     <div class="patient-info">
         <h2>Patient Information</h2>
@@ -190,7 +190,6 @@
         <th>Case Number</th>
         <th>Status</th>
         <th>Action</th>
-        <th>Treatment</th>
         <th>Present</th>
         <th>Department</th>
         <th>Treatment</th>
@@ -214,13 +213,7 @@
                         <button type="submit" class="action-button">Update Case</button>
                     </form>
                 </td>
-                <td>
-                    <% if (c.getTreatment() != null) { %>
-                        <%= c.getTreatment() %>
-                    <% } else { %>
-                        undefined
-                    <% } %>
-                </td>
+               
                 <td>
                             <input type="checkbox" disabled <%= c.isPresent() ? "checked" : "" %>/>
                         </td>

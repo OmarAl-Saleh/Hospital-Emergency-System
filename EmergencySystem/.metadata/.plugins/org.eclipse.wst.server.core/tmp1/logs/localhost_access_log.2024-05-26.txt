@@ -408,3 +408,9 @@
 0:0:0:0:0:0:0:1 - - [26/May/2024:23:10:57 +0300] "GET /EmergencySystem/department_nurse?source=sign-in&name=test&password=1234 HTTP/1.1" 200 2771
 0:0:0:0:0:0:0:1 - - [26/May/2024:23:11:03 +0300] "POST /EmergencySystem/patient_manage_cases.jsp HTTP/1.1" 302 -
 0:0:0:0:0:0:0:1 - - [26/May/2024:23:11:03 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
+127.0.0.1 - - [26/May/2024:23:49:40 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [26/May/2024:23:49:41 +0300] "GET /EmergencySystem/index.jsp HTTP/1.1" 200 2161
+0:0:0:0:0:0:0:1 - - [26/May/2024:23:49:46 +0300] "GET /EmergencySystem/log_in.jsp?you-are=patient&sign=sign-in HTTP/1.1" 200 2036
+0:0:0:0:0:0:0:1 - - [26/May/2024:23:50:18 +0300] "GET /EmergencySystem/patient?source=sign-in&email=test%40gmail.com&phoneNumber=1234 HTTP/1.1" 200 37818
+0:0:0:0:0:0:0:1 - - [26/May/2024:23:50:51 +0300] "POST /EmergencySystem/patient_manage_cases.jsp HTTP/1.1" 200 37910
+0:0:0:0:0:0:0:1 - - [26/May/2024:23:55:48 +0300] "POST /EmergencySystem/patient_manage_cases.jsp HTTP/1.1" 200 37882

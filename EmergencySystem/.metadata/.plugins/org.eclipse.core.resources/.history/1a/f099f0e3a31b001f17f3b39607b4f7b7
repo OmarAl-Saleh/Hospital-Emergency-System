@@ -213,7 +213,13 @@
                         <button type="submit" class="action-button">Update Case</button>
                     </form>
                 </td>
-               
+                <td>
+                    <% if (c.getTreatment() != null) { %>
+                        <%= c.getTreatment() %>
+                    <% } else { %>
+                        undefined
+                    <% } %>
+                </td>
                 <td>
                             <input type="checkbox" disabled <%= c.isPresent() ? "checked" : "" %>/>
                         </td>
