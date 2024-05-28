@@ -6,7 +6,7 @@ public abstract class database {
 	 // Database connection parameters
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
     private static final String DB_USER = "system";
-    private static final String DB_PASSWORD = "Omr_20021129";
+    private static final String DB_PASSWORD = "XXXXXXXXX";
 	// Database connection method
 	public static Connection connect() throws SQLException {
 	    try {
