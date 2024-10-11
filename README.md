@@ -10,9 +10,7 @@ This is a web application developed for managing hospital emergency cases. The s
 - Moyyad Abu Malloah
 - Hashem Jarrah
 
-## Deadline
 
-Sunday, May 26th, 2024
 
 ## Technologies Used
 
